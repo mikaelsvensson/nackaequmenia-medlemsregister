@@ -1,0 +1,37 @@
+Hej.
+
+För nya scouter saknas ofta mycket information och för scouter som varit med ett tag så kanske informationen har blivit gammal.
+
+Nedan ser ni vad vi tror oss veta om {name}.
+
+Scouten själv
+-------------
+Namn:         {name}
+Personnummer: {ssn}
+E-post:       {email}
+Mobiltelefon: {phone_mobile}
+Adress:       {address_street},{address_postal}
+Allergier och annat medicinskt: {allergies}
+
+Förälder 1
+----------
+Namn: {guardian_1_name}
+E-post: {guardian_1_email}
+Telefon, mobil: {guardian_1_phone}
+Telefon, hem: {phone}
+Adress: {guardian_1_address_street} {guardian_1_address_postal}
+
+Förälder 2
+----------
+Namn: {guardian_2_name}
+E-post: {guardian_2_email}
+Telefon, mobil: {guardian_2_phone}
+Telefon, hem: {phone}
+Adress: {guardian_2_address_street} {guardian_2_address_postal}
+
+Klicka här för att fylla i vad som saknas eller vad som är felaktigt:
+{link}
+
+Tack på förhand.
+
+Mvh. ledarna i Nacka Equmenia, scoutkåren i Björknäs

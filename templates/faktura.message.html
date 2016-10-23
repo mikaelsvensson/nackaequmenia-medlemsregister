@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body style="font-family: sans-serif;">
+<h1>{{ rubrik }}</h1>
+
+{% for rad in intro %}
+    <p>{{ rad }}</p>
+{% endfor %}
+
+{% set sum = 0.0 %}
+{% for rad in rader %}
+{%     set sum = sum + (rad.belopp * rad.antal) %}
+{% endfor %}
+
+<table style="
+        border-collapse: collapse;
+        border: 1px solid black;">
+    <tfoot>
+    <tr>
+        <td style="border-top: 1px solid black;">
+        </td>
+        <td style="border-top: 1px solid black; padding: 0.3em; text-align: right;">
+            {{ sum | number_format(0, ',', ' ') }} kr
+        </td>
+    </tr>
+    </tfoot>
+    <tbody>
+    {% for rad in rader %}
+        <tr>
+            <td style="padding: 0.3em">
+                {{ rad.text }}
+                {% if rad.antal != 1 %}
+                    ({{rad.antal}} st)
+                {% endif %}
+            </td>
+            <td style="padding: 0.3em; text-align: right">
+                {{ (rad.belopp * rad.antal) | number_format(0, ',', ' ') }} kr
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <tr>
+        <td style="padding: 0.3em 1em 0.3em 0;">Betalningsmottagare</td>
+        <td style="padding: 0.3em 1em 0.3em 0;">
+            {{ betalningsmottagare }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0.3em 1em 0.3em 0;">Meddelande/referens</td>
+        <td style="padding: 0.3em 1em 0.3em 0;">
+            {{ _ref }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0.3em 1em 0.3em 0;">Att betala</td>
+        <td style="padding: 0.3em 1em 0.3em 0;">
+            {{ sum | number_format(0, ',', ' ') }} kr
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0.3em 1em 0.3em 0;">Förfallodatum</td>
+        <td style="padding: 0.3em 1em 0.3em 0;">
+            {{ forfallodatum }}
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

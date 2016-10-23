@@ -1,0 +1,9 @@
+*.iml
+/.idea/
+
+/.htaccess
+/.htpasswd
+
+/vendor/
+
+/config.ini

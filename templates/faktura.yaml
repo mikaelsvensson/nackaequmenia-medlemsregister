@@ -1,0 +1,14 @@
+rubrik: "Faktura från Nacka equmenia"
+intro:
+  - "Hej."
+  - "Här en faktura från Nacka equmenia."
+rader:
+  - text: "Hej"
+    antal: 2
+    belopp: 12
+  - text: "Världen"
+    antal: 1
+    belopp: 10.2
+betalningsmottagare: "PG 466215-1"
+fakturadatum: "den 3 juli 2016"
+forfallodatum: "2016-08-03"

@@ -1,0 +1,15 @@
+{
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    }
+  },
+  "require": {
+    "tecnickcom/tcpdf": "6.2.12",
+    "symfony/yaml": "v3.1.5",
+    "twig/twig": "~1.0",
+    "twbs/bootstrap": "v3.3.7",
+    "components/jquery": "3.1.1",
+    "phpmailer/phpmailer": "v5.2.16"
+  }
+}

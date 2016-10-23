@@ -1,0 +1,19 @@
+[mail]
+;Specify main and backup SMTP servers
+smtp_host = YOUR_HOST
+
+;Enable SMTP authentication
+smtp_auth = true
+
+;SMTP username
+smtp_username = YOUR_USERNAME
+smtp_from = YOUR_MAIL_ADDRESS
+
+;SMTP password
+smtp_password = PASSWORD
+
+;Enable TLS encryption, `ssl` also accepted
+;smtp_secure = tls
+
+;TCP port to connect to
+smtp_port = 25

@@ -1,0 +1,102 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'cagliostro', serif;
+        }
+
+        h1 {
+            font-family: 'frederickathegreat', serif;
+            font-size: 25pt;
+            margin: 0;
+        }
+
+        p, td {
+            font-size: 13pt;
+        }
+        small {
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+<h1>{{ rubrik }}</h1>
+
+{% for rad in intro %}
+<p>{{ rad }}</p>
+{% endfor %}
+
+<table cellpadding="3" style="border: 0.5pt solid black">
+    {% set sum = 0.0 %}
+    {% for rad in rader %}
+    <tr>
+        <td align="left" width="80%">
+            {{ rad.text }}
+            {% if rad.antal != 1 %}
+                ({{rad.antal}} st)
+            {% endif %}
+        </td>
+        <td align="right" width="20%">{{ (rad.belopp * rad.antal) | number_format(0, ',', ' ') }} kr</td>
+    </tr>
+    {% set sum = sum + (rad.belopp * rad.antal) %}
+    {% endfor %}
+    <tr>
+        <td align="right" style="border-top: 0.5pt solid black"></td>
+        <td align="right" style="border-top: 0.5pt solid black">{{ sum | number_format(0, ',', ' ') }} kr</td>
+    </tr>
+</table>
+<br/>
+<br/>
+<br/>
+<table cellpadding="5">
+    <tr>
+        <td width="30%">Betalningsmottagare:</td>
+        <td width="70%">{{ betalningsmottagare }}</td>
+    </tr>
+    <tr>
+        <td>Meddelande:</td>
+        <td>{{ _ref }}</td>
+    </tr>
+    <tr>
+        <td>Att betala:</td>
+        <td>{{ sum | number_format(0, ',', ' ') }} kr</td>
+    </tr>
+    <tr>
+        <td>Fakturadatum:</td>
+        <td>{{ fakturadatum }}</td>
+    </tr>
+    <tr>
+        <td>Förfallodatum:</td>
+        <td>{{ forfallodatum }}</td>
+    </tr>
+</table>
+
+<br/>
+<br/>
+<br/>
+
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td width="65%"></td>
+        <td width="35%" align="right">
+            <table width="auto" style="border: 0.5pt solid black; text-align: center;"><tr><td>
+                <small>
+                    <br/>
+                        Har du bank-app från Nordea<br/>
+                        eller Swedbank? Fyll i<br/>
+                        betalningsinformationen<br/>
+                        automatiskt genom att skanna<br/>
+                        QR-koden via appen.<br/><br/>
+                </small>
+                {% set dueDate = forfallodatum | date("Ymd") %}
+                {% set data = '{"uqr":1,"tp":1,"nme":"Nacka Equmenia/SMU","iref":"ref","ddt":"' ~ dueDate ~ '","due":"12.0","pt":"PG","acc":"466215-1"}' %}
+                <img height="100" width="100"
+                     src="http://api.qrserver.com/v1/create-qr-code/?format=png&size=150x150&data={{ data | e('url') }}"/>
+                <br/>
+            </td></tr></table>
+
+        </td>
+    </tr>
+</table>
+</body>
+</html>

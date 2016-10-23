@@ -1,0 +1,48 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'cagliostro', serif;
+        }
+        h1 {
+            font-family: 'frederickathegreat', serif;
+            font-size: 25pt;
+            margin: 0;
+        }
+        p, td {
+            font-size: 13pt;
+        }
+    </style>
+</head>
+<body>
+<h1>{{ rubrik }}</h1>
+
+{% for rad in intro %}
+    <p>{{ rad }}</p>
+{% endfor %}
+
+<table cellpadding="5" style="border: 0.5pt solid black">
+    {% set sum = 0.0 %}
+    {% for rad in rader %}
+        <tr>
+            <td align="left" width="80%">{{ rad.text }}</td>
+            <td align="right" width="20%">{{ rad.belopp | number_format(2, ',', ' ') }} kr</td>
+        </tr>
+        {% set sum = sum + rad.belopp %}
+    {% endfor %}
+    <tr>
+        <td align="right" style="border-top: 0.5pt solid black"></td>
+        <td align="right" style="border-top: 0.5pt solid black">{{ sum | number_format(2, ',', ' ') }} kr</td>
+    </tr>
+</table>
+<br/>
+<br/>
+<br/>
+<table cellpadding="5">
+    <tr><td width="25%">Betalningsmottagare:</td><td width="75%">{{ betalningsmottagare }}</td></tr>
+    <tr><td>Meddelande:</td><td>{{ meddelande }}</td></tr>
+    <tr><td>Fakturadatum: </td><td>{{ fakturadatum }}</td></tr>
+    <tr><td>Förfallodatum: </td><td>{{ forfallodatum }}</td></tr>
+</table>
+</body>
+</html>
