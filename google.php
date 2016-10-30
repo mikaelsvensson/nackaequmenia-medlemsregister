@@ -16,6 +16,7 @@ $entries = google_data_get();
         break;
         case 'send-pdf':
         case 'send-pdf-preview':
+        case 'send-pdf-template-config':
         case 'send-pdf-do':
             include 'google-send-pdf.php';
         break;
