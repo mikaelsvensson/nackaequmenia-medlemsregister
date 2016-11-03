@@ -20,6 +20,11 @@ $entries = google_data_get();
         case 'send-pdf-do':
             include 'google-send-pdf.php';
         break;
+        case 'sync-contacts':
+//        case 'sync-contacts-preview':
+        case 'sync-contacts-do':
+            include 'google-sync-contacts.php';
+        break;
         case 'show-map':
             include 'google-show-map.php';
         break;

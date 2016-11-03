@@ -7,3 +7,4 @@
 /vendor/
 
 /config.ini
+*.apps.googleusercontent.com.json

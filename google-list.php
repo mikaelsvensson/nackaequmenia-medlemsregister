@@ -92,4 +92,5 @@
     <button type="submit" name="action" value="show-map" class="btn btn-default">Visa på karta</button>
     <button type="submit" name="action" value="print-list" class="btn btn-default">Telefonlist</button>
     <button type="submit" name="action" value="send-pdf" class="btn btn-default">Skicka PDF</button>
+    <button type="submit" name="action" value="sync-contacts" class="btn btn-default">Synka Google-kontakter</button>
 </div>

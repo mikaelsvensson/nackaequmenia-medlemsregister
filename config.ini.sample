@@ -17,3 +17,10 @@ smtp_password = PASSWORD
 
 ;TCP port to connect to
 smtp_port = 25
+
+[google]
+;Google API Credentials
+google_api_client_id = YOUR_GOOGLE_API_CLIENT_ID
+google_api_client_secret = YOUR_GOOGLE_API_CLIENT_SECRET
+google_api_credentials_file = RELATIVE_PATH_TO_CREDENTIALS_FILE
+google_api_oauthcallback_uri = FULL_URI_OF_CALLBACK_PAGE

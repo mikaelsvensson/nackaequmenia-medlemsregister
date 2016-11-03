@@ -10,6 +10,7 @@
     "twig/twig": "~1.0",
     "twbs/bootstrap": "v3.3.7",
     "components/jquery": "3.1.1",
-    "phpmailer/phpmailer": "v5.2.16"
+    "phpmailer/phpmailer": "v5.2.16",
+    "google/apiclient": "^2.0"
   }
 }
