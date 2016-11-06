@@ -25,9 +25,9 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 $thisFileName = substr(__FILE__, strlen(__DIR__));
 
-if (strpos($referrer, $thisFileName) === false) {
-    header("Location: " . $referrer);
-} else {
+//if (strpos($referrer, $thisFileName) === false) {
+//    header("Location: " . $referrer);
+//} else {
     echo "Utloggad";
-}
+//}
 ?>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry gd:etag="&quot;QXo4fjVSLit7I2A9XRFTFUsITgM.&quot;"
+       xmlns="http://www.w3.org/2005/Atom"
+       xmlns:batch="http://schemas.google.com/gdata/batch"
+       xmlns:gContact="http://schemas.google.com/contact/2008"
+       xmlns:gd="http://schemas.google.com/g/2005">
+    <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#contact"/>
+    <!--<title>TITLE</title>-->
+    <content>NOTE</content>
+    <gd:name>
+        <gd:fullName>GIVEN_NAME FAMILY_NAME</gd:fullName>
+        <gd:givenName>GIVEN_NAME</gd:givenName>
+        <gd:familyName>FAMILY_NAME</gd:familyName>
+    </gd:name>
+    <gd:structuredPostalAddress rel="http://schemas.google.com/g/2005#home" primary="true">
+        <gd:street>STREET_ADDRESS</gd:street>
+        <gd:city>CITY</gd:city>
+        <!--<gd:region>CA</gd:region>-->
+        <gd:postcode>POST_CODE</gd:postcode>
+        <gd:country>Sweden</gd:country>
+        <gd:formattedAddress>
+            STREET_ADDRESS CITY
+        </gd:formattedAddress>
+    </gd:structuredPostalAddress>
+
+    <!--<gd:email rel="http://schemas.google.com/g/2005#home" address="linnea.eriksson@edu.nacka.se" primary="true"/>-->
+    <!--<gd:phoneNumber rel="http://schemas.google.com/g/2005#mobile" primary="true">+46738391001</gd:phoneNumber>-->
+    <!--<gd:phoneNumber rel="http://schemas.google.com/g/2005#home">087-158-757</gd:phoneNumber>-->
+
+    <gd:extendedProperty name="http://www.nackasmu.se/schemas/medlemsregister#version" value="0.1"/>
+    <gd:extendedProperty name="http://www.nackasmu.se/schemas/medlemsregister#contact-id" value=""/>
+    <gd:extendedProperty name="http://www.nackasmu.se/schemas/medlemsregister#displayname-id" value=""/>
+
+    <gContact:groupMembershipInfo deleted="false" href="ALL_CONTACTS_GROUP_ID"/>
+    <gContact:groupMembershipInfo deleted="false" href="APP_CONTACTS_GROUP_ID"/>
+</entry>

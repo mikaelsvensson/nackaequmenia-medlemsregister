@@ -9,7 +9,8 @@ $entries = google_data_get();
 ?>
 <form action="google.php" method="post">
     <?php
-    switch($_POST['action']) {
+    $action = isset($_POST['action']) ? $_POST['action'] : $_GET['action'];
+    switch($action) {
         case 'send-links':
         case 'send-links-do':
             include 'google-send-links.php';
@@ -21,7 +22,7 @@ $entries = google_data_get();
             include 'google-send-pdf.php';
         break;
         case 'sync-contacts':
-//        case 'sync-contacts-preview':
+        case 'sync-contacts-preview':
         case 'sync-contacts-do':
             include 'google-sync-contacts.php';
         break;

@@ -15,12 +15,14 @@ $client = createGoogleClient(
     $config['google']['google_api_oauthcallback_uri']);
 
 if (!isset($_GET['code'])) {
+    $client->setState($_GET['action']);
     $auth_url = $client->createAuthUrl();
     header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
 } else {
     $client->authenticate($_GET['code']);
     $_SESSION['access_token'] = $client->getAccessToken();
-    $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/medlemsregister/';
-    header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
+    $redirect_uri = '/medlemsregister/google.php' . (isset($_GET['state']) ? '?action=' . $_GET['state'] : '');
+    $location = filter_var($redirect_uri, FILTER_SANITIZE_URL);
+    header('Location: ' . $location);
 }
 ?>
