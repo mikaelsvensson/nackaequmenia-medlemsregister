@@ -1,0 +1,18 @@
+mottagare:
+  - "Att: Namn"
+  - "Beställare"
+  - "Gatuadress 123"
+  - "123 45 POSTORT"
+notes:
+  - "Kontakta oss på info@nackasmu.se om"
+  - "du har frågor gällande fakturan."
+rader:
+  - text: "Hej"
+    antal: 20
+    belopp: 120
+  - text: "Världen"
+    antal: 10
+    belopp: 100
+betalningsmottagare: "PlusGiro 46 62 15-1"
+fakturadatum: "2016-12-01"
+forfallodatum: "2016-12-31"

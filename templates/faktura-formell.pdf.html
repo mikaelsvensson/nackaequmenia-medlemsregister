@@ -1,0 +1,123 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'cagliostro', serif;
+        }
+
+        h1 {
+            font-family: 'frederickathegreat', serif;
+            font-size: 25pt;
+            margin: 0;
+        }
+
+        p, td {
+            font-size: 13pt;
+        }
+
+        small {
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+<h1>Faktura {{ _ref }}</h1>
+
+<table width="100%">
+    <tr>
+        <td width="50%" valign="top"><small>Mottagare:
+            {% for rad in mottagare %}
+            <br>{{ rad }}
+            {% endfor %}
+            <br>
+            <br><i>Fakturadatum:</i>
+            <br>{{ fakturadatum }}
+        </small></td>
+        <td width="50%" valign="top"><small>Avsändare:
+            <br>Nacka Equmenia
+            <br>Nacka Missionsförsamling
+            <br>Värmdövägen 622
+            <br>132 41 Saltsjö-Boo
+            </small>
+        </td>
+    </tr>
+</table>
+
+<br>
+<br>
+<br>
+
+<table cellpadding="3" style="border: 0.5pt solid black">
+    {% set sum = 0.0 %}
+    {% for rad in rader %}
+    <tr>
+        <td align="left" width="75%">
+            {{ rad.text }}
+            {% if rad.antal != 1 %}
+            ({{rad.antal}} st)
+            {% endif %}
+        </td>
+        <td align="right" width="25%">{{ (rad.belopp * rad.antal) | number_format(0, ',', ' ') }} kr</td>
+    </tr>
+    {% set sum = sum + (rad.belopp * rad.antal) %}
+    {% endfor %}
+    <tr>
+        <td align="right" style="border-top: 0.5pt solid black"></td>
+        <td align="right" style="border-top: 0.5pt solid black">Summa: {{ sum | number_format(0, ',', ' ') }} kr</td>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<table cellpadding="5">
+    <tr>
+        <td width="30%">Betalningsmottagare:</td>
+        <td width="70%"><tt>{{ betalningsmottagare }}</tt></td>
+    </tr>
+    <tr>
+        <td>Meddelande (OCR):</td>
+        <td><tt>{{ _ref }}</tt></td>
+    </tr>
+    <tr>
+        <td>Att betala:</td>
+        <td><tt>{{ sum | number_format(0, ',', '') }} kr</tt></td>
+    </tr>
+    <tr>
+        <td>Förfallodatum:</td>
+        <td><tt>{{ forfallodatum }}</tt></td>
+    </tr>
+</table>
+
+<p>{% for rad in notes %}{{ rad }}<br>{% endfor %}</p>
+
+<p></p>
+<p></p>
+<hr>
+<p></p>
+<table>
+    <tr>
+        <td width="30%"><small>Postadress:
+                <br>Nacka Equmenia
+                <br>Nacka Missionsförsamling
+                <br>Värmdövägen 622
+                <br>132 41 Saltsjö-Boo
+            </small>
+        </td>
+        <td width="18%"><small>Org.nr:
+                <br>802505-4753
+            </small>
+        </td>
+        <td width="20%"><small>E-post:
+                <br>info@nackasmu.se
+            </small>
+        </td>
+        <td width="32%"><small>Webb:
+                <br>www.nackasmu.se
+                <br>www.facebook.com/bjorknasscout
+            </small>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
