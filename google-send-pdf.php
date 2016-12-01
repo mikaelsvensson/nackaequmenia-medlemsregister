@@ -186,12 +186,15 @@ if ($_POST['action'] == 'send-pdf') { ?>
         </div>
     </div>
     <div>
-        <button type="submit" name="action" value="send-pdf" class="btn btn-default btn-sm">Tillbaka</button>
+        <button type="submit" name="action" value="send-pdf-template-config" class="btn btn-default btn-sm">Tillbaka</button>
         <button type="submit" name="action" value="send-pdf-preview" class="btn btn-primary">Förhandsgranska</button>
     </div>
 <?php } elseif ($_POST['action'] == 'send-pdf-preview') { ?>
     <?= sprintf('<input type="hidden" name="%s" value="%s">', FORM_PARAM_SENDPDF_TEMPLATE, $_POST["" . FORM_PARAM_SENDPDF_TEMPLATE . ""]) ?>
     <?= sprintf('<input type="hidden" name="%s" value="%s">', FORM_FIELD_SENDPDF_DATA, $_POST["" . FORM_FIELD_SENDPDF_DATA . ""]) ?>
+    <?= implode("", array_map(function ($value) {
+        return sprintf('<input type="hidden" name="%s" value="%s">', 'entry[]', $value);
+    }, $_POST['entry'])) ?>
     <div class="row">
         <div class="col-xs-12">
             <h1>Skicka PDF - Förhandsgranskning</h1>
@@ -246,6 +249,9 @@ if ($_POST['action'] == 'send-pdf') { ?>
 <?php } elseif ($_POST['action'] == 'send-pdf-do') { ?>
     <?= sprintf('<input type="hidden" name="%s" value="%s">', FORM_PARAM_SENDPDF_TEMPLATE, $_POST["" . FORM_PARAM_SENDPDF_TEMPLATE . ""]) ?>
     <?= sprintf('<input type="hidden" name="%s" value="%s">', FORM_FIELD_SENDPDF_DATA, $_POST["" . FORM_FIELD_SENDPDF_DATA . ""]) ?>
+    <?= implode("", array_map(function ($value) {
+        return sprintf('<input type="hidden" name="%s" value="%s">', 'entry[]', $value);
+    }, $_POST['entry'])) ?>
     <div class="row">
         <div class="col-xs-12">
             <h1>Skicka PDF</h1>
