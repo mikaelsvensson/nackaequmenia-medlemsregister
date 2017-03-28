@@ -133,7 +133,7 @@ $createContactDryrun = function ($requestBody, $logFileName, $client) {
 $createContact = function ($requestBodyDocument, $logFileName, $client) {
     $requestBody = $requestBodyDocument->saveXML();
 
-//    file_put_contents("$logFileName-create.requestbody.xml", $requestBody);
+    //file_put_contents("$logFileName-create.requestbody.xml", $requestBody);
 
     $response = $client->post("https://www.google.com/m8/feeds/contacts/default/full", [
         'headers' => [
@@ -143,13 +143,38 @@ $createContact = function ($requestBodyDocument, $logFileName, $client) {
         'body' => $requestBody
     ]);
 
-//    file_put_contents("$logFileName-create.log", print_r($response, true));
-//    file_put_contents("$logFileName-create.responsebody.xml", $response->getBody());
+    //file_put_contents("$logFileName-create.log", print_r($response, true));
+    //file_put_contents("$logFileName-create.responsebody.xml", $response->getBody());
 
     if ($response->getStatusCode() != 201) {
         return [false, "Fel uppstod: " . $response->getReasonPhrase()];
     }
     return [true, "Skapad"];
+};
+
+$updateContact = function ($requestBodyDocument, $requestUri, $logFileName, $client) {
+    $etag = $requestBodyDocument->documentElement->attributes["etag"]->nodeValue;
+
+    $requestBody = $requestBodyDocument->saveXML();
+
+    //file_put_contents("$logFileName-update.requestbody.xml", $requestBody);
+
+    $response = $client->put($requestUri, [
+        'headers' => [
+            'GData-Version' => '3.0',
+            'Content-Type' => 'application/atom+xml',
+            'If-Match' => $etag
+        ],
+        'body' => $requestBody
+    ]);
+
+    //file_put_contents("$logFileName-update.log", print_r($response, true));
+    //file_put_contents("$logFileName-update.responsebody.xml", $response->getBody());
+
+    if ($response->getStatusCode() != 200) {
+        return [false, "[$etag]Fel uppstod: " . $response->getReasonPhrase()];
+    }
+    return [true, "Uppdaterad"];
 };
 
 function createGoogleContactGroup($requestBodyDocument, $logFileName, $client)
@@ -283,8 +308,12 @@ function setNodeValue($doc, $text, $xpath, $contextNode = null)
 {
     $res = getFirstXpathMatch($doc, $xpath, $contextNode);
     if ($res != null) {
-        $res->nodeValue = $text;
+        if ($res->nodeValue != $text) {
+            $res->nodeValue = $text;
+            return true;
+        }
     }
+    return false;
 }
 
 function getElementText($doc, $xpath, $contextNode = null)
@@ -307,6 +336,17 @@ function getFirstXpathMatch($doc, $xpath, $contextNode = null)
     }
 }
 
+function getAllXpathMatches($doc, $xpath, $contextNode = null)
+{
+    $matches = [];
+    $res = queryDoc($doc, $xpath, $contextNode);
+    for ($i = 0; $i < $res->length; $i++) {
+        $item = $res->item($i);
+        $matches[] = $item->nodeValue;
+    }
+    return $matches;
+}
+
 
 ?>
 <div class="row">
@@ -317,7 +357,52 @@ function getFirstXpathMatch($doc, $xpath, $contextNode = null)
     </div>
 </div>
 
-<?php if (isset($client)) { ?>
+<?php function setEmailAddresses($doc, $entryNode, $emailAddresses, &$log)
+{
+    $emailAddressesBefore = getAllXpathMatches($doc, 'gd:email/@address', $entryNode);
+    removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "email");
+    foreach ($emailAddresses as $emailAddress) {
+        $newEmailElement = $doc->createElementNS("http://schemas.google.com/g/2005", "email");
+
+        $newEmailElement->setAttribute("address", $emailAddress);
+        $newEmailElement->setAttribute("rel", "http://schemas.google.com/g/2005#other");
+
+        $entryNode->appendChild($newEmailElement);
+//                            $log[] = sprintf("L&auml;gger till e-post %s", $email);
+    }
+    $emailAddressesAfter = getAllXpathMatches($doc, 'gd:email/@address', $entryNode);
+
+    sort($emailAddressesBefore);
+    sort($emailAddressesAfter);
+    $emailAddressesUpdated = implode(",", $emailAddressesBefore) != implode(",", $emailAddressesAfter);
+    return $emailAddressesUpdated;
+}
+
+function setPhoneNumbers($doc, $entryNode, $phoneNumbers, &$log)
+{
+    $phoneNumbersBefore = getAllXpathMatches($doc, 'gd:phoneNumber/@uri', $entryNode);
+    removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "phoneNumber");
+    foreach ($phoneNumbers as $phoneNumber) {
+        $newPhoneElement = $doc->createElementNS("http://schemas.google.com/g/2005", "phoneNumber");
+
+        $isMobile = in_array(substr($phoneNumber, 0, 3), ["070", "072", "073", "076", "079"]);
+        $type = $isMobile ? "http://schemas.google.com/g/2005#mobile" : "http://schemas.google.com/g/2005#home";
+        $newPhoneElement->textContent = $phoneNumber;
+        $newPhoneElement->setAttribute("uri", "tel:+46-" . ($phoneNumber[0] == "0" ? substr($phoneNumber, 1) : $phoneNumber));
+        $newPhoneElement->setAttribute("rel", $type);
+
+        $entryNode->appendChild($newPhoneElement);
+//                            $log[] = sprintf("L&auml;gger till telefon %s", $phone);
+    }
+    $phoneNumbersAfter = getAllXpathMatches($doc, 'gd:phoneNumber/@uri', $entryNode);
+
+    sort($phoneNumbersBefore);
+    sort($phoneNumbersAfter);
+    $phoneNumbersUpdated = implode(",", $phoneNumbersBefore) != implode(",", $phoneNumbersAfter);
+    return $phoneNumbersUpdated;
+}
+
+if (isset($client)) { ?>
     <div class="row">
         <div class="col-xs-12">
             <table class="table table-bordered table-condensed">
@@ -390,6 +475,7 @@ function getFirstXpathMatch($doc, $xpath, $contextNode = null)
                     printf('<tr><td colspan="4"><strong>%s</strong></td></tr>', $fullName);
 
                     foreach (array_unique($desiredContact['displayName']) as $displayNameId => $displayName) {
+                        $modified = false;
 
 //                        $displayNameId = "$contactId-$displayNameId";
                         $existingContactElement = getFirstXpathMatch($googleContactsXml, "" .
@@ -424,70 +510,54 @@ function getFirstXpathMatch($doc, $xpath, $contextNode = null)
                             $doc->load("google-sync-contacts-empty.xml");
                         }
 
+
                         $entryNode = $doc->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "entry")->item(0);
-                        removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "phoneNumber");
-                        removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "email");
 
-                        foreach ($emailAddresses as $emailAddress) {
-                            $newEmailElement = $doc->createElementNS("http://schemas.google.com/g/2005", "email");
+                        $modified |= setEmailAddresses($doc, $entryNode, $emailAddresses, $log);
 
-                            $newEmailElement->setAttribute("address", $emailAddress);
-                            $newEmailElement->setAttribute("rel", "http://schemas.google.com/g/2005#other");
+                        $modified |= setPhoneNumbers($doc, $entryNode, $phoneNumbers, $log);
 
-                            $entryNode->appendChild($newEmailElement);
-//                            $log[] = sprintf("L&auml;gger till e-post %s", $email);
-                        }
+                        $modified |= setNodeValue($doc, $displayName, "gd:name/gd:fullName");
+                        $modified |= setNodeValue($doc, substr($fullName, 0, strpos($fullName, ' ')), "gd:name/gd:givenName");
+                        $modified |= setNodeValue($doc, substr($fullName, strpos($fullName, ' ') + 1), "gd:name/gd:familyName");
 
-                        foreach ($phoneNumbers as $phoneNumber) {
-                            $newPhoneElement = $doc->createElementNS("http://schemas.google.com/g/2005", "phoneNumber");
+                        $modified |= setNodeValue($doc, implode(". ", $notes), "a:content");
 
-                            $isMobile = in_array(substr($phoneNumber, 0, 3), ["070", "072", "073", "076", "079"]);
-                            $type = $isMobile ? "http://schemas.google.com/g/2005#mobile" : "http://schemas.google.com/g/2005#home";
-                            $newPhoneElement->textContent = $phoneNumber;
-                            $newPhoneElement->setAttribute("uri", "tel:+46-" . ($phoneNumber[0] == "0" ? substr($phoneNumber, 1) : $phoneNumber));
-                            $newPhoneElement->setAttribute("rel", $type);
+                        $modified |= setNodeValue($doc, $addressStreet, "gd:structuredPostalAddress/gd:street");
+                        $modified |= setNodeValue($doc, $entryPostArea, "gd:structuredPostalAddress/gd:city");
+                        $modified |= setNodeValue($doc, $entryPostCode, "gd:structuredPostalAddress/gd:postcode");
+                        $modified |= setNodeValue($doc, $addressStreet . ", " . $addressPostal, "gd:structuredPostalAddress/gd:formattedAddress");
 
-                            $entryNode->appendChild($newPhoneElement);
-//                            $log[] = sprintf("L&auml;gger till telefon %s", $phone);
-                        }
+                        $modified |= setNodeValue($doc, $contactId, "gd:extendedProperty[@name='http://www.nackasmu.se/schemas/medlemsregister#contact-id']/@value");
+                        $modified |= setNodeValue($doc, $displayNameId, "gd:extendedProperty[@name='http://www.nackasmu.se/schemas/medlemsregister#displayname-id']/@value");
 
-//                        setNodeValue($doc, $displayName, "a:title");
-//                        setNodeValue($doc, $fullName, "gd:name/gd:fullName");
-                        setNodeValue($doc, $displayName, "gd:name/gd:fullName");
-                        setNodeValue($doc, substr($fullName, 0, strpos($fullName, ' ')), "gd:name/gd:givenName");
-                        setNodeValue($doc, substr($fullName, strpos($fullName, ' ') + 1), "gd:name/gd:familyName");
-
-                        setNodeValue($doc, implode(". ", $notes), "a:content");
-
-                        setNodeValue($doc, $addressStreet, "gd:structuredPostalAddress/gd:street");
-                        setNodeValue($doc, $entryPostArea, "gd:structuredPostalAddress/gd:city");
-                        setNodeValue($doc, $entryPostCode, "gd:structuredPostalAddress/gd:postcode");
-                        setNodeValue($doc, $addressStreet . ", " . $addressPostal, "gd:structuredPostalAddress/gd:formattedAddress");
-
-                        setNodeValue($doc, $contactId, "gd:extendedProperty[@name='http://www.nackasmu.se/schemas/medlemsregister#contact-id']/@value");
-                        setNodeValue($doc, $displayNameId, "gd:extendedProperty[@name='http://www.nackasmu.se/schemas/medlemsregister#displayname-id']/@value");
-
-                        setNodeValue($doc, $globalContactsGroupId, "gContact:groupMembershipInfo[@href='ALL_CONTACTS_GROUP_ID']/@href");
-                        setNodeValue($doc, $appContactsGroupId, "gContact:groupMembershipInfo[@href='APP_CONTACTS_GROUP_ID']/@href");
+                        $modified |= setNodeValue($doc, $globalContactsGroupId, "gContact:groupMembershipInfo[@href='ALL_CONTACTS_GROUP_ID']/@href");
+                        $modified |= setNodeValue($doc, $appContactsGroupId, "gContact:groupMembershipInfo[@href='APP_CONTACTS_GROUP_ID']/@href");
 
                         $isDryrun = $action != 'sync-contacts-do';
+
                         $processingResult = [];
-                        if ($isAlreadyInContactList) {
-                            $updater = $isDryrun ? $updateContactDryrun : $updateContactDryrun;
-                            $processingResult = $updater($doc, $existingContactEditHref, $fileName, $client);
+                        if ($modified) {
+                            if ($isAlreadyInContactList) {
+                                $updater = $isDryrun ? $updateContactDryrun : $updateContact;
+                                $processingResult = $updater($doc, $existingContactEditHref, $fileName, $client);
+                            } else {
+                                $creator = $isDryrun ? $createContactDryrun : $createContact;
+                                $processingResult = $creator($doc, $fileName, $client);
+                            }
+                            list($success, $message) = $processingResult;
+                            $result = $isDryrun ? "default" : ($success ? "success" : "warning");
                         } else {
-                            $creator = $isDryrun ? $createContactDryrun : $createContact;
-                            $processingResult = $creator($doc, $fileName, $client);
+                            $result = "default";
+                            $message = "Inga f&ouml;r&auml;ndringar";
                         }
 
-                        list($success, $message) = $processingResult;
-
-                        printf('<tr><td>%s <!--<br><small>%s</small>--></td><td>%s</td><td>%s</td><td><span class="label label-%s">%s</span></td></tr>',
+                        printf('<tr><td>%s <!--<br><small><small>%s</small></small>--></td><td>%s</td><td>%s</td><td><span class="label label-%s">%s</span></td></tr>',
                             $displayName,
                             count($log) > 0 ? implode("<br>", $log) : "",
                             implode("<br>", $emailAddresses),
                             implode("<br>", $phoneNumbers),
-                            $isDryrun ? "default" : ($success ? "success" : "warning"),
+                            $result,
                             $message
                         );
                     }
