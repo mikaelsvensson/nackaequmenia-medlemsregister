@@ -22,6 +22,14 @@ $abortTime = $startTime + ($maxExecutionTime * 0.90);
 
 //print_r([$startTime, $maxExecutionTime, $abortTime]);
 
+function saveXml($doc, $filename)
+{
+    $isSaveEnabled = $_SERVER['SERVER_NAME'] == 'localhost';
+    if ($isSaveEnabled) {
+        $doc->save($filename);
+    }
+}
+
 function getGoogleContacts($client)
 {
     $feedURL = "https://www.google.com/m8/feeds/contacts/default/full?max-results=1000&alt=json";
@@ -90,7 +98,7 @@ function getGoogleContactsXml($client)
     $body = $response->getBody();
 
     $doc->loadXML($body);
-//    $doc->save("temp/_feed.cache.xml");
+    saveXml($doc, "temp/_feed.cache.xml");
 //    }
     return $doc;
 }
@@ -115,25 +123,25 @@ function getGoogleContactGroupsXml($client)
     $body = $response->getBody();
 
     $doc->loadXML($body);
-//    $doc->save("temp/_groups.cache.xml");
+    saveXml($doc, "temp/_groups.cache.xml");
 //    }
     return $doc;
 }
 
 $updateContactDryrun = function ($requestBody, $requestUri, $logFileName, $client) {
-//    $requestBody->save("$logFileName-update.preview.xml");
+    saveXml($requestBody, "$logFileName-update.preview.xml");
     return [true, "Existerande kontakt kommer att uppdateras"];
 };
 
 $createContactDryrun = function ($requestBody, $logFileName, $client) {
-//    $requestBody->save("$logFileName-create.preview.xml");
+    saveXml($requestBody, "$logFileName-create.preview.xml");
     return [true, "Ny kontakt kommer att skapas"];
 };
 
 $createContact = function ($requestBodyDocument, $logFileName, $client) {
     $requestBody = $requestBodyDocument->saveXML();
 
-    //file_put_contents("$logFileName-create.requestbody.xml", $requestBody);
+    saveXml($requestBody, "$logFileName-create.requestbody.xml");
 
     $response = $client->post("https://www.google.com/m8/feeds/contacts/default/full", [
         'headers' => [
@@ -157,6 +165,7 @@ $updateContact = function ($requestBodyDocument, $requestUri, $logFileName, $cli
 
     $requestBody = $requestBodyDocument->saveXML();
 
+    saveXml($requestBodyDocument, "$logFileName-update.requestbody.xml");
     //file_put_contents("$logFileName-update.requestbody.xml", $requestBody);
 
     $response = $client->put($requestUri, [
@@ -181,6 +190,7 @@ function createGoogleContactGroup($requestBodyDocument, $logFileName, $client)
 {
     $requestBody = $requestBodyDocument->saveXML();
 
+    saveXml($requestBodyDocument, "$logFileName-create.requestbody.xml");
 //    file_put_contents("$logFileName-create.requestbody.xml", $requestBody);
 
     $response = $client->post("https://www.google.com/m8/feeds/groups/default/full", [
@@ -467,8 +477,6 @@ if (isset($client)) { ?>
                     $addressPostal = $desiredContact['addressPostal'];
                     $notes = $desiredContact['notes'];
 
-                    $entryGivenName = substr($fullName, 0, strpos($fullName, ' '));
-                    $entryFamilyName = substr($fullName, strpos($fullName, ' ') + 1);
                     $entryPostCode = preg_replace('/[^0-9]/', '', $addressStreet);
                     $entryPostArea = trim(preg_replace('/[0-9]/', '', $addressPostal));
 
@@ -518,8 +526,15 @@ if (isset($client)) { ?>
                         $modified |= setPhoneNumbers($doc, $entryNode, $phoneNumbers, $log);
 
                         $modified |= setNodeValue($doc, $displayName, "gd:name/gd:fullName");
-                        $modified |= setNodeValue($doc, substr($fullName, 0, strpos($fullName, ' ')), "gd:name/gd:givenName");
-                        $modified |= setNodeValue($doc, substr($fullName, strpos($fullName, ' ') + 1), "gd:name/gd:familyName");
+
+                        $spacePos = strpos($fullName, ' ');
+                        if ($spacePos !== false) {
+                            $modified |= setNodeValue($doc, substr($fullName, 0, $spacePos), "gd:name/gd:givenName");
+                            $modified |= setNodeValue($doc, substr($fullName, $spacePos + 1), "gd:name/gd:familyName");
+                        } else {
+                            $modified |= setNodeValue($doc, $fullName, "gd:name/gd:givenName");
+                            $modified |= setNodeValue($doc, "", "gd:name/gd:familyName");
+                        }
 
                         $modified |= setNodeValue($doc, implode(". ", $notes), "a:content");
 
