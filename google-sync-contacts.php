@@ -3,6 +3,42 @@
 //ini_set('display_errors', 1);
 require_once 'google-util.php';
 
+$patternsOptions = [
+    'Minimal' => [
+        '{name}',
+        '{name}',
+        'Kontakter: {guardian_1_name}, {guardian_2_name}',
+        '{guardian_1_name}',
+        '{name}, kontakt {guardian_1_name_given}',
+        'Kontakt för {name}',
+        '{guardian_2_name}',
+        '{name}, kontakt {guardian_2_name_given}',
+        'Kontakt för {name}'
+    ],
+    'Scout först' => [
+        'Scout {name}',
+        'Scout {name}',
+        'Nacka Equmenia. Föräldrar: {guardian_1_name}, {guardian_2_name}.',
+        'Scout {name} - {guardian_1_name_given}',
+        'Scout {name} - {guardian_1_name_given}',
+        'Nacka Equmenia. Kontakt för {name}.',
+        'Scout {name} - {guardian_2_name_given}',
+        'Scout {name} - {guardian_2_name_given}',
+        'Nacka Equmenia. Kontakt för {name}.'
+    ],
+    'Scout efter namn' => [
+        '{name} scout',
+        '{name} scout',
+        'Nacka Equmenia. Föräldrar: {guardian_1_name}, {guardian_2_name}.',
+        '{name} scout - {guardian_1_name_given}',
+        '{name} scout - {guardian_1_name_given}',
+        'Nacka Equmenia. Kontakt för {name}.',
+        '{name} scout - {guardian_2_name_given}',
+        '{name} scout - {guardian_2_name_given}',
+        'Nacka Equmenia. Kontakt för {name}.'
+    ]
+];
+
 $config = parse_ini_file('config.ini', true);
 
 $googleClient = createGoogleClient(
@@ -128,20 +164,20 @@ function getGoogleContactGroupsXml($client)
     return $doc;
 }
 
-$updateContactDryrun = function ($requestBody, $requestUri, $logFileName, $client) {
-    saveXml($requestBody, "$logFileName-update.preview.xml");
+$updateContactDryrun = function ($requestBodyDocument, $requestUri, $logFileName, $client) {
+    saveXml($requestBodyDocument, "$logFileName-update.preview.xml");
     return [true, "Existerande kontakt kommer att uppdateras"];
 };
 
-$createContactDryrun = function ($requestBody, $logFileName, $client) {
-    saveXml($requestBody, "$logFileName-create.preview.xml");
+$createContactDryrun = function ($requestBodyDocument, $logFileName, $client) {
+    saveXml($requestBodyDocument, "$logFileName-create.preview.xml");
     return [true, "Ny kontakt kommer att skapas"];
 };
 
 $createContact = function ($requestBodyDocument, $logFileName, $client) {
     $requestBody = $requestBodyDocument->saveXML();
 
-    saveXml($requestBody, "$logFileName-create.requestbody.xml");
+    saveXml($requestBodyDocument, "$logFileName-create.requestbody.xml");
 
     $response = $client->post("https://www.google.com/m8/feeds/contacts/default/full", [
         'headers' => [
@@ -215,49 +251,83 @@ function createGoogleContactGroup($requestBodyDocument, $logFileName, $client)
         return [null, $response->getReasonPhrase()];
     }
 }
-
-function getIndividualContacts($entries)
+/**
+ * Substitutes {field} placeholders in the specified pattern with the corresponding values from the supplied contact entry.
+ */
+function formatString($pattern, $entry)
 {
+    $constants = get_defined_constants();
+    $props = array();
+    foreach ($constants as $name => $value) {
+        if (isset($entry[$value])) {
+            $props['{' . $name . '}'] = $entry[$value];
+        }
+    }
+    return str_replace(array_keys($props), array_values($props), $pattern);
+}
+
+function getIndividualContacts($entries, $patterns)
+{
+    list (
+        $selfFullNamePattern,
+        $selfDisplayNamePattern,
+        $selfNotePattern,
+        $guardian1FullNamePattern,
+        $guardian1DisplayNamePattern,
+        $guardian1NotePattern,
+        $guardian2FullNamePattern,
+        $guardian2DisplayNamePattern,
+        $guardian2NotePattern
+        ) = $patterns;
+
     $desiredContacts = [];
     foreach ($entries as $entry) {
 
+        $entry[name_given] = strtok($entry[name], ' ');
+        $entry[guardian_1_name_given] = strtok($entry[guardian_1_name], ' ');
+        $entry[guardian_2_name_given] = strtok($entry[guardian_2_name], ' ');
+
+        $selfNote = (empty($entry[allergies]) ? false : formatString("Allergier: {allergies}.", $entry)) .
+            (empty($entry[note]) ? false : formatString("{note}.", $entry)) .
+            formatString($selfNotePattern, $entry);
+
         $opts = [
             [
-                $entry[name],
-                $entry[name],
+                formatString($selfFullNamePattern, $entry),
+                formatString($selfDisplayNamePattern, $entry),
                 $entry[address_street],
                 $entry[address_postal],
                 $entry[phone],
                 $entry[email],
-                (empty($entry[allergies]) ? false : "Allergier: " . $entry[allergies] . ". ") .
-                (empty($entry[note]) ? false : $entry[note] . ". ") .
-                "Kontakter: " . $entry[guardian_1_name] . "," . $entry[guardian_2_name],
-                getSimpleId($entry[name]) . "-self"
+                $selfNote,
+                getSimpleId($entry[name]) . "-self",
+                getSimpleId($entry[name])
             ],
             [
-                $entry[guardian_1_name],
-                sprintf('%s, kontakt %s', $entry[name], strtok($entry[guardian_1_name], ' ')),
+                formatString($guardian1FullNamePattern, $entry),
+                formatString($guardian1DisplayNamePattern, $entry),
                 $entry[guardian_1_address_street],
                 $entry[guardian_1_address_postal],
                 $entry[guardian_1_phone],
                 $entry[guardian_1_email],
-                "Kontakt för " . $entry[name],
-                getSimpleId($entry[name]) . "-guardian-1"
+                formatString($guardian1NotePattern, $entry),
+                getSimpleId($entry[name]) . "-guardian-1",
+                getSimpleId($entry[guardian_1_name])
             ],
             [
-                $entry[guardian_2_name],
-                sprintf('%s, kontakt %s', $entry[name], strtok($entry[guardian_2_name], ' ')),
+                formatString($guardian2FullNamePattern, $entry),
+                formatString($guardian2DisplayNamePattern, $entry),
                 $entry[guardian_2_address_street],
                 $entry[guardian_2_address_postal],
                 $entry[guardian_2_phone],
                 $entry[guardian_2_email],
-                "Kontakt för " . $entry[name],
-                getSimpleId($entry[name]) . "-guardian-2"
+                formatString($guardian2NotePattern, $entry),
+                getSimpleId($entry[name]) . "-guardian-2",
+                getSimpleId($entry[guardian_2_name])
             ]
         ];
         foreach ($opts as $opt) {
-            list($fullName, $displayName, $addressStreet, $addressPostal, $phone, $email, $note, $displayNameId) = $opt;
-            $contactId = getSimpleId($fullName);
+            list($fullName, $displayName, $addressStreet, $addressPostal, $phone, $email, $note, $displayNameId, $contactId) = $opt;
             if (!empty($contactId)) {
                 $desiredContacts[$contactId]['name'] = $fullName;
                 $desiredContacts[$contactId]['displayName'][$displayNameId] = $displayName;
@@ -412,7 +482,60 @@ function setPhoneNumbers($doc, $entryNode, $phoneNumbers, &$log)
     return $phoneNumbersUpdated;
 }
 
-if (isset($client)) { ?>
+if (isset($client)) {
+    if ($action == 'sync-contacts') {
+        ?>
+        <div class="row">
+            <div class="col-xs-12">
+                <p>Börja med att välja hur du vill att kontakternas namn och anteckningar ska sparas i din kontaktlista.</p>
+                <p>Oavsett vad du väljer så kommer alla kontakter läggas i en grupp av kontakter som heter "Nacka Equmenia".</p>
+            </div>
+        </div>
+        <?php
+        $sampleIndexes = array_keys($entries);
+        shuffle($sampleIndexes);
+        foreach ($patternsOptions as $key => $options) {
+        ?>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="checkbox">
+                        <label>
+                            <input type="radio" name="sync-contacts-template" value="<?= $key ?>">
+                            <?= $key ?>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <small><small>
+                            <p>Exempel på hur kontakternas information kommer att se ut med den här mallen:</p>
+                        <table class="table table-bordered table-condensed ">
+                            <thead>
+                            <tr>
+                                <th>Fullständigt namn</th>
+                                <th>Visningsnamn</th>
+                                <th>Anteckning</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $samples = getIndividualContacts(array($entries[$sampleIndexes[0]], $entries[$sampleIndexes[1]], $entries[$sampleIndexes[2]]), $options);
+                            foreach ($samples as $firstKey => $sample) {
+                                $firstDisplayNameKey = array_keys($sample['displayName'])[0];
+                                printf('<tr><td>%s</td><td>%s</td><td>%s</td></tr>', $sample['name'], $sample['displayName'][$firstDisplayNameKey], join('', $sample['notes']));
+                            }
+                            ?>
+                            </tbody>
+                        </table>
+                    </small></small>
+                </div>
+            </div>
+        <?php
+        }
+    } else {
+    ?>
+        <?= sprintf('<input type="hidden" name="%s" value="%s">', 'sync-contacts-template', $_POST["" . 'sync-contacts-template' . ""]) ?>
     <div class="row">
         <div class="col-xs-12">
             <table class="table table-bordered table-condensed">
@@ -441,9 +564,8 @@ if (isset($client)) { ?>
                     list($appContactsGroupId, $createGroupError) = createGoogleContactGroup($createGroupRequestBodyDocument, "temp/_contacts-creategroup", $client);
                 }
 
-                //                print_r($appContactsGroupId);
-
-                $desiredContacts = getIndividualContacts($entries);
+                $patterns = $patternsOptions[$_POST['sync-contacts-template']];
+                $desiredContacts = getIndividualContacts($entries, $patterns);
 
                 /**
                  * @param $client
@@ -596,14 +718,21 @@ if (isset($client)) { ?>
         </div>
     </div>
 
+    <?php } ?>
+
     <?php if ($action == 'sync-contacts') { ?>
         <div>
             <button type="submit" name="action" value="" class="btn btn-default btn-sm">Tillbaka</button>
+            <button type="submit" name="action" value="sync-contacts-preview" class="btn btn-primary">Förhandsgranska</button>
+        </div>
+    <?php } elseif ($action == 'sync-contacts-preview') { ?>
+        <div>
+            <button type="submit" name="action" value="sync-contacts" class="btn btn-default btn-sm">Tillbaka</button>
             <button type="submit" name="action" value="sync-contacts-do" class="btn btn-primary">Synka</button>
         </div>
     <?php } elseif ($action == 'sync-contacts-do') { ?>
         <div>
-            <button type="submit" name="action" value="sync-contacts" class="btn btn-default btn-sm">Tillbaka</button>
+            <button type="submit" name="action" value="sync-contacts-preview" class="btn btn-default btn-sm">Tillbaka</button>
             <button type="submit" name="action" value="" class="btn btn-primary">Stäng</button>
         </div>
     <?php } ?>

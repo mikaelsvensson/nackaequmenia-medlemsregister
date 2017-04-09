@@ -30,6 +30,10 @@ const model_release_photographer = 25;
 const model_release_internet = 26;
 const model_release_name = 27;
 
+const name_given = 28; // This column does not exists in the Google Spreadsheet, it is added by this application.
+const guardian_1_name_given = 29; // This column does not exists in the Google Spreadsheet, it is added by this application.
+const guardian_2_name_given = 30; // This column does not exists in the Google Spreadsheet, it is added by this application.
+
 const CACHE_EXPIRATION_SECONDS = 300;
 
 function sort_by_name($a, $b)
