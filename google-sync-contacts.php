@@ -30,11 +30,11 @@ $patternsOptions = [
         '{name} scout',
         '{name} scout',
         'Nacka Equmenia. Föräldrar: {guardian_1_name}, {guardian_2_name}.',
-        '{name} scout - {guardian_1_name_given}',
-        '{name} scout - {guardian_1_name_given}',
+        '{name_given} {name_surname_initial} scout - {guardian_1_name_given}',
+        '{name_given} {name_surname_initial} scout - {guardian_1_name_given}',
         'Nacka Equmenia. Kontakt för {name}.',
-        '{name} scout - {guardian_2_name_given}',
-        '{name} scout - {guardian_2_name_given}',
+        '{name_given} {name_surname_initial} scout - {guardian_2_name_given}',
+        '{name_given} {name_surname_initial} scout - {guardian_2_name_given}',
         'Nacka Equmenia. Kontakt för {name}.'
     ]
 ];
@@ -284,6 +284,7 @@ function getIndividualContacts($entries, $patterns)
     foreach ($entries as $entry) {
 
         $entry[name_given] = strtok($entry[name], ' ');
+        $entry[name_surname_initial] = preg_replace('/^\w+\s/i', '', $entry[name])[0];
         $entry[guardian_1_name_given] = strtok($entry[guardian_1_name], ' ');
         $entry[guardian_2_name_given] = strtok($entry[guardian_2_name], ' ');
 
