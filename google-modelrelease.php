@@ -2,10 +2,13 @@
 require_once 'core.php';
 
 require_once 'core-google-data.php';
+require_once 'ContactsDataSource.php';
 
 include 'core-page-start.php';
 
-$entries = google_data_get();
+$contactsDataSoure = new \contacts\MergedContactDataSource();
+$entries = $contactsDataSoure->getEntries();
+//$entries = google_data_get();
 ?>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -13,9 +16,9 @@ $entries = google_data_get();
         <p>Följande scouter får synas på internet "i information om, och reklam för, scoutkåren Nacka Equmenia":</p>
         <ul>
             <?php foreach ($entries as $key => $entry) { ?>
-                <?php if ($entry[model_release_nacka_equmenia] == "J" && $entry[model_release_internet] == "J") { ?>
+                <?php if ($entry->model_release_nacka_equmenia == "Ja" && $entry->model_release_internet == "Ja") { ?>
                     <li>
-                        <?= $entry[name] ?>
+                        <?= $entry->name ?>
                     </li>
                 <?php } ?>
             <?php } ?>

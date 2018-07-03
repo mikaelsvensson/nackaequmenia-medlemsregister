@@ -1,5 +1,5 @@
 <?php
-require_once 'lib/phpmailer/PHPMailerAutoload.php';
+//require_once 'lib/phpmailer/PHPMailerAutoload.php';
 
 require_once 'core-google-data.php';
 
@@ -17,16 +17,17 @@ $config = parse_ini_file('config.ini', true);
 
 $link = 'google-map-view.html?' . implode('|', array_map(function ($key) use ($entries) {
         $entry = $entries[$key];
-        return rawurlencode($entry[name] . ', ' . $entry[address_street] . ';' . $entry[address_street] . ',' . $entry[address_postal] . ",SWEDEN;;");
-    }, $_POST['entry']));
+        return rawurlencode($entry->name . ', ' . $entry->address_street . ';' . $entry->address_street . ',' . $entry->address_postal . ",SWEDEN;;");
+    }, $_POST['select_contacts']));
 
-foreach ($_POST['entry'] as $key) {
+print get_selected_contacts_form_field();
+
+foreach ($_POST['select_contacts'] as $key) {
     $entry = $entries[$key];
     ?>
-    <input type="hidden" name="entry[]" value="<?= $key ?>">
     <div class="row">
         <div class="col-xs-12">
-            <p><strong><?= $entry[name] ?></strong>, <?= $entry[address_street] ?>, <?= $entry[address_postal] ?></p>
+            <p><strong><?= $entry->name ?></strong>, <?= $entry->address_street ?>, <?= $entry->address_postal ?></p>
         </div>
     </div>
 <?php } ?>

@@ -1,11 +1,15 @@
 <?php
 require_once 'core.php';
 
-require_once 'core-google-data.php';
-
 include 'core-page-start.php';
 
-$entries = google_data_get();
+require_once 'core-google-data.php';
+require_once 'ContactsDataSource.php';
+
+
+$contactsDataSoure = new \contacts\MergedContactDataSource();
+$entries = $contactsDataSoure->getEntries();
+//$entries = google_data_get();
 ?>
 <script type="application/javascript">
     function openMap() {
@@ -27,10 +31,10 @@ $entries = google_data_get();
             <select id="people" multiple="multiple" class="form-control" size="30">
                 <?php foreach ($entries as $key => $entry) { ?>
                     <?php printf('<option value="%s">%s, %s, %s</option>',
-                        rawurlencode($entry[name] . ', ' . $entry[address_street] . ';' . $entry[address_street] . ',' . $entry[address_postal] . ",SWEDEN;;"),
-                        $entry[name],
-                        $entry[address_street],
-                        $entry[address_postal]) ?>
+                        rawurlencode($entry->name . ', ' . $entry->address_street . ';' . $entry->address_street . ',' . $entry->address_postal . ",SWEDEN;;"),
+                        $entry->name,
+                        $entry->address_street,
+                        $entry->address_postal) ?>
                 <?php } ?>
             </select>
         </div>

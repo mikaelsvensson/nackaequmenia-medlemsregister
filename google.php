@@ -1,11 +1,12 @@
 <?php
 require_once 'core.php';
 
-require_once 'core-google-data.php';
-
 include 'core-page-start.php';
 
-$entries = google_data_get();
+require_once 'ContactsDataSource.php';
+
+$contactsDataSource = new \contacts\MergedContactDataSource();
+$entries = $contactsDataSource->getEntries();
 ?>
 <form action="google.php" method="post">
     <?php
