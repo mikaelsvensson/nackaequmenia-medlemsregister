@@ -2,7 +2,10 @@ Hej.
 
 För nya scouter saknas ofta mycket information och för scouter som varit med ett tag så kanske informationen har blivit gammal.
 
-Nedan ser ni vad vi tror oss veta om {name}.
+Nedan ser ni vad vi tror oss veta om {name_given}.
+
+Gå hit för att fylla i vad som saknas eller vad som är felaktigt:
+{link}
 
 Scouten själv
 -------------
@@ -29,9 +32,14 @@ Telefon, mobil: {guardian_2_phone}
 Telefon, hem: {phone}
 Adress: {guardian_2_address_street} {guardian_2_address_postal}
 
-Klicka här för att fylla i vad som saknas eller vad som är felaktigt:
-{link}
+Fotografier
+-----------
+Bilder på scouten får användas...
+...i information om, och reklam för, scoutkåren Nacka Equmenia: {model_release_nacka_equmenia}
+...i information om, och reklam för, annan scoutrelaterad verksamhet: {model_release_scout_material}
+...i fotografens publika album: {model_release_photographer}
 
-Tack på förhand.
+Bilder får användas på internet: {model_release_internet}
+Namn får skrivas ut: {model_release_name}
 
 Mvh. ledarna i Nacka Equmenia, scoutkåren i Björknäs
