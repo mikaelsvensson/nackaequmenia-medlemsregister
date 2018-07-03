@@ -13,6 +13,4 @@ rader:
   - text: "Världen"
     antal: 10
     belopp: 100
-betalningsmottagare: "PlusGiro 46 62 15-1"
-fakturadatum: "2016-12-01"
-forfallodatum: "2016-12-31"
+betalningsmottagare: "Bankgiro 736-4318"

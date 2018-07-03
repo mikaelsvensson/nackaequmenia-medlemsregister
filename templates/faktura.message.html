@@ -1,9 +1,13 @@
 <html>
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="font-family: sans-serif;">
 <h1>{{ rubrik }}</h1>
+
+<p><i>Den här fakturan gäller {{namn}} och skickades den {{ datum_idag }}.</i></p>
 
 {% for rad in intro %}
     <p>{{ rad }}</p>
@@ -22,7 +26,7 @@
         <td style="border-top: 1px solid black;">
         </td>
         <td style="border-top: 1px solid black; padding: 0.3em; text-align: right;">
-            Summa: {{ sum | number_format(0, ',', ' ') }} kr
+            Summa: {{ sum | number_format(2, ',', ' ') }} kr
         </td>
     </tr>
     </tfoot>
@@ -36,40 +40,37 @@
                 {% endif %}
             </td>
             <td style="padding: 0.3em; text-align: right">
-                {{ (rad.belopp * rad.antal) | number_format(0, ',', ' ') }} kr
+                {{ (rad.belopp * rad.antal) | number_format(2, ',', ' ') }} kr
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<table>
-    <tbody>
-    <tr>
-        <td style="padding: 0.3em 1em 0.3em 0;">Betalningsmottagare</td>
-        <td style="padding: 0.3em 1em 0.3em 0;">
-            {{ betalningsmottagare }}
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 0.3em 1em 0.3em 0;">Meddelande/referens</td>
-        <td style="padding: 0.3em 1em 0.3em 0;">
-            {{ _ref }}
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 0.3em 1em 0.3em 0;">Att betala</td>
-        <td style="padding: 0.3em 1em 0.3em 0;">
-            {{ sum | number_format(0, ',', ' ') }} kr
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 0.3em 1em 0.3em 0;">Förfallodatum</td>
-        <td style="padding: 0.3em 1em 0.3em 0;">
-            {{ forfallodatum }}
-        </td>
-    </tr>
-    </tbody>
-</table>
+{% if sum > 500 %}
+    <p>Meddela oss om ni önskar delbetala över flera månader. <br/>Ange i så fall samma meddelande på samtliga delbetalningar.</p>
+{% endif %}
+
+<p>Du kan betala via Bankgiro eller Swish.</p>
+
+<div style="float: left; max-width: 20em; margin: 0 1em 1em 0; border: 1px solid lightgray; padding: 1em;">
+    <p style="margin-top: 0"><strong>Betala via Bankgiro</strong></p>
+    <pre>Bankgiro-nummer:  736-4318<br/>Meddelande:       {{ _ref }}<br/>Belopp:           {{ sum | number_format(2, ',', ' ') }}<br/>Förfallodatum:    {{ datum_om30dagar }}</pre>
+    <p style="margin-top: 2em"><small>I Nordeas eller Swedbanks appar kan du skanna QR-koden för att slippa knappa in siffrorna själv:</small></p>
+    {% set dueDate = datum_om30dagar | date("Ymd") %}
+    {% set data = '{"uqr":1,"tp":1,"nme":"Nacka Equmenia/SMU","cid":"802505-4753","iref":"' ~ _ref ~ '","ddt":"' ~ dueDate ~ '","due":' ~ sum ~ ',"pt":"BG","acc":"736-4318"}' %}
+    <div style="text-align: center">
+        <img height="150" width="150" src="{{ bankgiro_qr_code_url(sum, _ref, datum_om30dagar) }}"/>
+    </div>
+</div>
+<div style="float: left; max-width: 20em; margin: 0 1em 1em 0;border: 1px solid lightgray; padding: 1em;">
+    <p style="margin-top: 0"><strong>Betala via Swish</strong></p>
+    <pre>Mottagare:   1233494234<br/>Meddelande:  {{ _ref }}<br/>Belopp:      {{ sum | number_format(2, ',', ' ') }}</pre>
+    <p style="margin-top: 2em"><small>I Swish-appen kan du skanna QR-koden för att slippa knappa in siffrorna själv:</small></p>
+    <div style="text-align: center">
+        <img height="150" width="150" src="{{ swish_qr_code_url(sum, _ref) }}"/>
+    </div>
+</div>
+<div style="clear: both;"></div>
 </body>
 </html>
