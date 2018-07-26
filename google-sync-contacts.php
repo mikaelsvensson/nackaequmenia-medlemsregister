@@ -284,7 +284,7 @@ function getIndividualContacts($entries, $patterns)
                 formatString($selfDisplayNamePattern, $entry),
                 $entry->address_street,
                 $entry->address_postal,
-                $entry->phone,
+                $entry->phone_mobile ?: $entry->phone,
                 $entry->email,
                 $selfNote,
                 getSimpleId($entry->name) . "-self",
