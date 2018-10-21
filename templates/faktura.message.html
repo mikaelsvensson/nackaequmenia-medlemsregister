@@ -51,8 +51,8 @@
     <p>Meddela oss om ni önskar delbetala över flera månader. <br/>Ange i så fall samma meddelande på samtliga delbetalningar.</p>
 {% endif %}
 
+{% if sum > 0 %}
 <p>Du kan betala via Bankgiro eller Swish.</p>
-
 <div style="float: left; max-width: 20em; margin: 0 1em 1em 0; border: 1px solid lightgray; padding: 1em;">
     <p style="margin-top: 0"><strong>Betala via Bankgiro</strong></p>
     <pre>Bankgiro-nummer:  736-4318<br/>Meddelande:       {{ _ref }}<br/>Belopp:           {{ sum | number_format(2, ',', ' ') }}<br/>Förfallodatum:    {{ datum_om30dagar }}</pre>
@@ -72,5 +72,9 @@
     </div>
 </div>
 <div style="clear: both;"></div>
+{% else %}
+    <p>Vi kommer återbetala {{ sum | abs | number_format(2, ',', ' ') }} kr.</p>
+    <p>Pengarna återbetalas till tidigare inrapporterat bankkonto.</p>
+{% endif %}
 </body>
 </html>
