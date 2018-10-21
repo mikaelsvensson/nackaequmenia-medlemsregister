@@ -90,9 +90,10 @@ function tristate_form_value($value)
 
 
 function get_selected_contacts_form_field() {
+    $selected = !empty($_POST['select_contacts']) ? $_POST['select_contacts'] : [];
     return implode("", array_map(function ($value) {
         return sprintf('<input type="hidden" name="%s" value="%s">', 'select_contacts[]', $value);
-    }, $_POST['select_contacts']));
+    }, $selected));
 }
 
 
