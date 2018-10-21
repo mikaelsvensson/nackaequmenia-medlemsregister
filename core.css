@@ -1,0 +1,51 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600);
+@import url(http://fonts.googleapis.com/css?family=Muli:400,400italic|Asap:400,400italic,700,700italic);
+body, td, th {
+	/*
+	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Muli', sans-serif;
+	*/
+    font-family: 'Asap', sans-serif;
+	font-size: 0.8em;
+	margin: 1em;
+	padding: 0;
+}
+h1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 3em;
+    margin: 0 0 0.3em 0;
+}
+table {
+	border-collapse:collapse;
+}
+th {
+	text-align:left;
+}
+thead tr th {
+	font-weight: 700;
+}
+tbody tr td {
+    border-top:1px solid #ccc;    
+}
+tbody tr.no-border td {
+    border-top:none;
+}
+td, th {
+	margin:0;
+	padding:0.2em 0 0.2em 1em;
+	vertical-align:top;
+	white-space: nowrap;
+	font-weight: 400;
+}
+tr td:first-child, tr th:first-child {
+	padding-left:0;
+}
+address {
+	white-space:nowrap;
+	display: block;
+	font-style: normal;
+}
+tr.indent td:first-child {
+    padding-left: 2em;
+}
