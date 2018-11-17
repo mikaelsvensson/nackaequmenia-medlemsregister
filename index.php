@@ -43,5 +43,6 @@
     <p><a href="google-map-config.php">Karta</a></p>
     <p><a href="google-modelrelease.php">Vem får synas på nätet?</a></p>
     <p><a href="google-data-check.php">Saknar vi viktig information för några scouter?</a></p>
+    <p><a href="google-birthdays.php">Födelsedagar</a></p>
     </body>
 </html>
