@@ -284,7 +284,8 @@ function getIndividualContacts($entries, $patterns)
                 formatString($selfDisplayNamePattern, $entry),
                 $entry->address_street,
                 $entry->address_postal,
-                $entry->phone_mobile ?: $entry->phone,
+                $entry->phone,
+                $entry->phone_mobile,
                 $entry->email,
                 $selfNote,
                 getSimpleId($entry->name) . "-self",
@@ -296,6 +297,7 @@ function getIndividualContacts($entries, $patterns)
                 $entry->guardian_1_address_street,
                 $entry->guardian_1_address_postal,
                 $entry->guardian_1_phone,
+                $entry->guardian_1_phone_mobile,
                 $entry->guardian_1_email,
                 formatString($guardian1NotePattern, $entry),
                 getSimpleId($entry->name) . "-guardian-1",
@@ -307,6 +309,7 @@ function getIndividualContacts($entries, $patterns)
                 $entry->guardian_2_address_street,
                 $entry->guardian_2_address_postal,
                 $entry->guardian_2_phone,
+                $entry->guardian_2_phone_mobile,
                 $entry->guardian_2_email,
                 formatString($guardian2NotePattern, $entry),
                 getSimpleId($entry->name) . "-guardian-2",
@@ -314,7 +317,7 @@ function getIndividualContacts($entries, $patterns)
             ]
         ];
         foreach ($opts as $opt) {
-            list($fullName, $displayName, $addressStreet, $addressPostal, $phone, $email, $note, $displayNameId, $contactId) = $opt;
+            list($fullName, $displayName, $addressStreet, $addressPostal, $phone1, $phone2, $email, $note, $displayNameId, $contactId) = $opt;
             if (!empty($contactId)) {
                 $desiredContacts[$contactId]['name'] = $fullName;
                 $desiredContacts[$contactId]['displayName'][$displayNameId] = $displayName;
@@ -323,13 +326,15 @@ function getIndividualContacts($entries, $patterns)
                 $desiredContacts[$contactId]['addressStreet'] = $addressStreet;
                 $desiredContacts[$contactId]['addressPostal'] = $addressPostal;
 
-                preg_match_all('/[0-9\s+-]+/', $phone, $phones);
+                preg_match_all('/[0-9\s+-]+/', $phone1, $phones1);
+                preg_match_all('/[0-9\s+-]+/', $phone2, $phones2);
                 $desiredContacts[$contactId]['phone'] = array_merge(
                     is_array($desiredContacts[$contactId]['phone']) ?
                         $desiredContacts[$contactId]['phone']
                         :
                         [],
-                    $phones[0]);
+                    $phones1[0],
+                    $phones2[0]);
             }
         }
     }

@@ -55,9 +55,17 @@ abstract class ContactsDataSource
 
     function sanitize_phone_number($value)
     {
+        $value = str_replace(['-', ' '], '', $value);
+        $value = str_replace(['0046', '+46'], '0', $value);
         if (preg_match('/^[1-9][0-9]+$/', $value) == 1) {
             // Value starts with a non-zero digit. Add the zero.
-            return "0$value";
+            $value = "0$value";
+        }
+        // TODO: DRY... This list of prefixes is very similar to the list of mobile-phone prefixes.
+        foreach (["08", "070", "072", "073", "076", "079"] as $prefix) {
+            if (substr($value, 0, strlen($prefix)) == $prefix) {
+                $value = $prefix . '-' . substr($value, strlen($prefix));
+            }
         }
         return $value;
     }
@@ -158,6 +166,10 @@ class ExternalContactsDataSource extends ContactsDataSource
             $contact->guardian_2_phone = $this->sanitize_phone_number($contact->guardian_2_phone);
             $contact->guardian_2_phone_mobile = $this->sanitize_phone_number($contact->guardian_2_phone_mobile);
 
+            $contact->email = strtolower($contact->email);
+            $contact->guardian_1_email = strtolower($contact->guardian_1_email);
+            $contact->guardian_2_email = strtolower($contact->guardian_2_email);
+
             return $contact;
         }, $entries);
 
@@ -218,6 +230,10 @@ class InternalContactsDataSource extends ContactsDataSource
             $contact->phone_mobile = $this->sanitize_phone_number($contact->phone_mobile);
             $contact->guardian_1_phone = $this->sanitize_phone_number($contact->guardian_1_phone);
             $contact->guardian_2_phone = $this->sanitize_phone_number($contact->guardian_2_phone);
+
+            $contact->email = strtolower($contact->email);
+            $contact->guardian_1_email = strtolower($contact->guardian_1_email);
+            $contact->guardian_2_email = strtolower($contact->guardian_2_email);
 
             return $contact;
         }, $entries);

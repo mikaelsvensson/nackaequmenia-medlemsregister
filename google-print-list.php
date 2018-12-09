@@ -33,6 +33,7 @@ foreach ($_POST['select_contacts'] as $key) {
                 <p>
                     <?= $entry->guardian_1_name ?>
                     <?php printf('<br/><a href="tel:%s">%s</a>', $entry->guardian_1_phone, $entry->guardian_1_phone) ?>
+                    <?php printf('<br/><a href="tel:%s">%s</a>', $entry->guardian_1_phone_mobile, $entry->guardian_1_phone_mobile) ?>
                     <?php printf('<br/><a href="mailto:%s">%s</a>', $entry->guardian_1_email, $entry->guardian_1_email) ?>
                 </p>
             </div>
@@ -43,6 +44,7 @@ foreach ($_POST['select_contacts'] as $key) {
                 <p>
                     <?= $entry->guardian_2_name ?>
                     <?php printf('<br/><a href="tel:%s">%s</a>', $entry->guardian_2_phone, $entry->guardian_2_phone) ?>
+                    <?php printf('<br/><a href="tel:%s">%s</a>', $entry->guardian_2_phone_mobile, $entry->guardian_2_phone_mobile) ?>
                     <?php printf('<br/><a href="mailto:%s">%s</a>', $entry->guardian_2_email, $entry->guardian_2_email) ?>
                 </p>
             </div>
