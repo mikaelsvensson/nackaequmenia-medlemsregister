@@ -54,7 +54,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 
 $startTime = time();
 $maxExecutionTime = intval(ini_get("max_execution_time"));
-$abortTime = $startTime + ($maxExecutionTime * 0.90);
+$abortTime = $startTime + ($maxExecutionTime * 0.75);
 
 //print_r([$startTime, $maxExecutionTime, $abortTime]);
 
@@ -586,6 +586,11 @@ if (isset($client)) {
 
                     $loopStart = time();
                     $loopIterations = 0;
+
+                    $isDryrun = $action != 'sync-contacts-do';
+
+                    $processedContacts = explode(',', $_POST['sync-contacts-processed']);
+
                     foreach ($desiredContacts as $contactId => $desiredContact) {
                         $fullName = $desiredContact['name'];
 //                    $displayName = implode(", ", array_unique($desiredContact['displayName']));
@@ -601,6 +606,11 @@ if (isset($client)) {
                         printf('<tr><td colspan="4"><strong>%s</strong></td></tr>', $fullName);
 
                         foreach (array_unique($desiredContact['displayName']) as $displayNameId => $displayName) {
+
+                            if (in_array($contactId . '_' . $displayNameId, $processedContacts)) {
+                                continue;
+                            }
+
                             $modified = false;
 
 //                        $displayNameId = "$contactId-$displayNameId";
@@ -636,7 +646,6 @@ if (isset($client)) {
                                 $doc->load("google-sync-contacts-empty.xml");
                             }
 
-
                             $entryNode = $doc->getElementsByTagNameNS("http://www.w3.org/2005/Atom", "entry")->item(0);
 
                             $modified |= setEmailAddresses($doc, $entryNode, $emailAddresses, $log);
@@ -667,8 +676,6 @@ if (isset($client)) {
                             $modified |= setNodeValue($doc, $globalContactsGroupId, "gContact:groupMembershipInfo[@href='ALL_CONTACTS_GROUP_ID']/@href");
                             $modified |= setNodeValue($doc, $appContactsGroupId, "gContact:groupMembershipInfo[@href='APP_CONTACTS_GROUP_ID']/@href");
 
-                            $isDryrun = $action != 'sync-contacts-do';
-
                             $processingResult = [];
                             if ($modified) {
                                 if ($isAlreadyInContactList) {
@@ -685,6 +692,10 @@ if (isset($client)) {
                                 $message = "Inga f&ouml;r&auml;ndringar";
                             }
 
+                            if (!$isDryrun) {
+                                $processedContacts[] = $contactId . '_' . $displayNameId;
+                            }
+
                             printf('<tr><td>%s <!--<br><small><small>%s</small></small>--></td><td>%s</td><td>%s</td><td><span class="label label-%s">%s</span></td></tr>',
                                 $displayName,
                                 count($log) > 0 ? implode("<br>", $log) : "",
@@ -699,7 +710,6 @@ if (isset($client)) {
                         $avgLoopIterationTime = 1.0 * (time() - $loopStart) / $loopIterations;
                         $estimatedNextLoopEndTime = time() + $avgLoopIterationTime;
 
-//                    print_r([$loopIterations, $avgLoopIterationTime, $estimatedNextLoopEndTime]);
 
                         if ($abortTime < $estimatedNextLoopEndTime) {
                             // Given the average execution time of a loop iteration, we should abort now in order to not
@@ -729,6 +739,7 @@ if (isset($client)) {
         </div>
     <?php } elseif ($action == 'sync-contacts-do') { ?>
         <div>
+            <?= !$isDryrun ? sprintf('<input type="hidden" name="%s" value="%s">', 'sync-contacts-processed', implode(',', $processedContacts)) : '' ?>
             <button type="submit" name="action" value="sync-contacts-preview" class="btn btn-default btn-sm">Tillbaka
             </button>
             <button type="submit" name="action" value="" class="btn btn-primary">Stäng</button>
