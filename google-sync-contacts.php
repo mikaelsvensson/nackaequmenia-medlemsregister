@@ -54,7 +54,7 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
 
 $startTime = time();
 $maxExecutionTime = intval(ini_get("max_execution_time"));
-$abortTime = $startTime + ($maxExecutionTime * 0.75);
+$abortTime = $startTime + ($maxExecutionTime * 0.50);
 
 //print_r([$startTime, $maxExecutionTime, $abortTime]);
 
@@ -380,8 +380,10 @@ function setNodeValue($doc, $text, $xpath, $contextNode = null)
 {
     $res = getFirstXpathMatch($doc, $xpath, $contextNode);
     if ($res != null) {
-        if ($res->nodeValue != $text) {
-            $res->nodeValue = $text;
+        $new = trim($text);
+        $old = $res->nodeValue;
+        if ($new != $old) {
+            $res->nodeValue = $new;
             return true;
         }
     }
@@ -433,7 +435,7 @@ function getAllXpathMatches($doc, $xpath, $contextNode = null)
 {
     $emailAddressesBefore = getAllXpathMatches($doc, 'gd:email/@address', $entryNode);
     removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "email");
-    foreach ($emailAddresses as $emailAddress) {
+    foreach (array_map('trim', $emailAddresses) as $emailAddress) {
         $newEmailElement = $doc->createElementNS("http://schemas.google.com/g/2005", "email");
 
         $newEmailElement->setAttribute("address", $emailAddress);
@@ -454,7 +456,7 @@ function setPhoneNumbers($doc, $entryNode, $phoneNumbers, &$log)
 {
     $phoneNumbersBefore = getAllXpathMatches($doc, 'gd:phoneNumber/@uri', $entryNode);
     removeChildren($entryNode, $log, "http://schemas.google.com/g/2005", "phoneNumber");
-    foreach ($phoneNumbers as $phoneNumber) {
+    foreach (array_map('trim', $phoneNumbers) as $phoneNumber) {
         $newPhoneElement = $doc->createElementNS("http://schemas.google.com/g/2005", "phoneNumber");
 
         $isMobile = in_array(substr($phoneNumber, 0, 3), ["070", "072", "073", "076", "079"]);

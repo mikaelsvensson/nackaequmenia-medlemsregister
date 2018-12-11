@@ -109,7 +109,7 @@ abstract class ContactsDataSource
         if (($handle = fopen($cacheFile, "r")) !== FALSE) {
             while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
                 $entries[] = array_map(function ($v) {
-                    return mb_convert_encoding($v, mb_internal_encoding(), 'UTF-8');
+                    return trim(mb_convert_encoding($v, mb_internal_encoding(), 'UTF-8'));
                 }, $data);
             }
             fclose($handle);
