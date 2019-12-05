@@ -1,0 +1,47 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body style="font-family: sans-serif;">
+<h1>Blankett för ledarmedlemskap</h1>
+
+<table>
+    <tbody>
+    <tr>
+        <td width="20%">Namn</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.name }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Personnummer</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.ssn }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Telefonnummer</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.phone }}</td>
+    </tr>
+    <tr>
+        <td width="20%">E-post</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.email }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Adress</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.address_street }}</td>
+    </tr>
+    <tr>
+        <td width="20%"></td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.address_postal }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Allergier</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.allergies }}</td>
+    </tr>
+    <tr>
+        <td width="20%">Annat att veta</td>
+        <td width="80%" style="border-bottom: 1px solid #000">{{ person.note }}</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'cagliostro', serif;
+        }
+
+        h1 {
+            font-family: 'frederickathegreat', serif;
+            font-size: 30pt;
+        }
+
+        p, td {
+            font-size: 12pt;
+        }
+
+        li {
+            font-size: 11pt;
+        }
+
+        ul {
+        }
+
+        small {
+            font-size: 10pt;
+        }
+
+        pre {
+            font-family: 'courier', monospace;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+<h1>Bli ledare i Nacka Equmenia</h1>
+<p>Jag ansöker om att bli ledare i Nacka equmenia.</p>
+<table>
+    <tbody>
+    <tr>
+        <td width="25%">Ansökan gäller</td>
+        <td width="3%" style="border: 1px solid #000;"></td>
+        <td width="22%">&nbsp;{{ datum_termin_forra }}</td>
+        <td width="3%" style="border: 1px solid #000"></td>
+        <td width="22%">&nbsp;{{ datum_termin_nu }}</td>
+        <td width="3%" style="border: 1px solid #000"></td>
+        <td width="22%">&nbsp;{{ datum_termin_nasta }}</td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <tbody>
+    <tr>
+        <td width="25%">&nbsp;<br>Namn</td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.name }}</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Personnummer</td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.ssn }}</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Telefonnummer</td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.phone_mobile }} {{ person.phone }}
+        </td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>E-post</td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.email }}</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Adress</td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.address_street }}</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br></td>
+        <td width="75%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.address_postal }}</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<table>
+    <tbody>
+    <tr>
+        <td width="25%"></td>
+        <td width="35%">Kontaktperson 1:</td>
+        <td width="5%"></td>
+        <td width="35%">Kontaktperson 2:</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Namn</td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.guardian_1_name }}</td>
+        <td width="5%"></td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.guardian_2_name }}</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Telefonnummer</td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.guardian_1_phone_mobile }} {{
+            person.guardian_1_phone }}
+        </td>
+        <td width="5%"></td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>{{ person.guardian_2_phone_mobile }} {{
+            person.guardian_2_phone }}
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+
+<p>Jag kommer som ledare följa Nacka equmenias regler och riktlinjer.</p>
+
+<p>Jag står bakom Nacka equmenias, Equmenias och Scouternas värderingar.</p>
+
+<p>Jag godkänner att Nacka equmenia behandlar mina personuppgifter.</p>
+
+<p></p>
+<p></p>
+<table>
+    <tbody>
+    <tr>
+        <td width="25%">&nbsp;<br>Underskrift</td>
+        <td width="75%" colspan="3" style="border-bottom: 1px solid #000">&nbsp;<br>&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Datum</td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>&nbsp;</td>
+        <td width="40%"></td>
+    </tr>
+    </tbody>
+</table>
+
+<p style="border-top: 1px dashed #000"><small>Nedanstående fylls i av föreningen.</small></p>
+
+<table>
+    <tbody>
+    <tr>
+        <td width="3%" style="border: 1px solid #000;"></td>
+        <td width="27%">&nbsp;Ansökan godkänns.</td>
+        <td width="3%" style="border: 1px solid #000;"></td>
+        <td width="67%">&nbsp;Aktuellt utdrag ur belastningsregistret har uppvisats.</td>
+    </tr>
+    <tr>
+    </tr>
+    </tbody>
+</table>
+
+<p></p>
+<p></p>
+<table>
+    <tbody>
+    <tr>
+        <td width="25%">&nbsp;<br>Namn och underskrift</td>
+        <td width="75%" colspan="3" style="border-bottom: 1px solid #000">&nbsp;<br>&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="25%">&nbsp;<br>Datum</td>
+        <td width="35%" style="border-bottom: 1px solid #000">&nbsp;<br>&nbsp;</td>
+        <td width="40%"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -9,7 +9,12 @@ const FORM_PARAM_SENDPDF_AUTOIMPORT = "sendpdf_autoimport";
 const ARCHIVE_FOLDER = 'archive';
 require_once 'core-google-data.php';
 
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+
 $config = parse_ini_file('config.ini', true);
+
+// TODO: Move Luhn class to separate file
 
 /**
  * Checksum (Luhn) class shamelessly copied from https://github.com/xi-project/xi-algorithm
@@ -177,7 +182,7 @@ function getTwig()
                 return 'error';
             }
         }
-        return 'http://www.' . $_SERVER["SERVER_NAME"] . '/' . substr(realpath($temp_file_path), strlen($_SERVER["DOCUMENT_ROOT"]));
+        return 'http://' . $_SERVER["SERVER_NAME"] . '/' . substr(realpath($temp_file_path), strlen($_SERVER["DOCUMENT_ROOT"]));
     });
     $twig->addFunction($swishQrFunction);
 
@@ -200,7 +205,7 @@ function getTwig()
         $hash = md5($url);
 
         $temp_file_path = "../medlemsregister-temp/$hash.png";
-        if (!file_exists($temp_file_path)) {
+        if (!file_exists($temp_file_path) || filesize($temp_file_path) == 0) {
             $http_config = array(
                 'http' => array(
                     'method' => 'GET'
@@ -212,11 +217,14 @@ function getTwig()
             $image_data = file_get_contents($url, false, $context);
             $write_result = file_put_contents($temp_file_path, $image_data);
             chmod($temp_file_path, 0644);
+            if (filesize($temp_file_path) == 0) {
+                unlink($temp_file_path);
+            }
             if ($write_result === false) {
                 return 'error';
             }
         }
-        return 'http://www.' . $_SERVER["SERVER_NAME"] . '/' . substr(realpath($temp_file_path), strlen($_SERVER["DOCUMENT_ROOT"]));
+        return 'http://' . $_SERVER["SERVER_NAME"] . '/' . substr(realpath($temp_file_path), strlen($_SERVER["DOCUMENT_ROOT"]));
     });
     $twig->addFunction($bankgiroQrFunction);
 
@@ -225,6 +233,13 @@ function getTwig()
 
 if (!is_array($_POST['select_contacts'])) {
     $_POST['select_contacts'] = [];
+}
+
+function get_term_name($offset)
+{
+    $dateInfo = getdate(date_modify(date_create(), $offset)->getTimestamp());
+    $termNow = ($dateInfo['mon'] < 7 ? 'VT ' : 'HT ') . $dateInfo['year'];
+    return $termNow;
 }
 
 if ($_POST['action'] == 'send-pdf') { ?>
@@ -331,14 +346,22 @@ if ($_POST['action'] == 'send-pdf') { ?>
         $luhn = new Luhn();
         while (file_exists(sprintf('%s/%s/%s.pdf', __DIR__, ARCHIVE_FOLDER, $id = $luhn->generate(intval(sprintf("%s%02d", date("ymd"), ++$fileCounter)))))) ;
 
+        $term_prev = get_term_name("-6 months");
+        $termNow = get_term_name("+1 second");
+        $term_next = get_term_name("+6 months");
+
         $entryData = [
             PROPERTY_SUBJECT => $twig->render($_POST[FORM_PARAM_SENDPDF_TEMPLATE] . '.subject.html', ['namn' => $entry->name]),
             PROPERTY_TO => $recipients,
             PROPERTY_REF => $id,
             'namn' => $entry->name,
+            'datum_termin_forra' => $term_prev,
+            'datum_termin_nu' => $termNow,
+            'datum_termin_nasta' => $term_next,
             'datum_idag' => date_format(date_create(), 'Y-m-d'),
             'datum_om14dagar' => date_format(date_add(date_create(), date_interval_create_from_date_string('14 days')), 'Y-m-d'),
-            'datum_om30dagar' => date_format(date_add(date_create(), date_interval_create_from_date_string('30 days')), 'Y-m-d')
+            'datum_om30dagar' => date_format(date_add(date_create(), date_interval_create_from_date_string('30 days')), 'Y-m-d'),
+            'person' => get_object_vars($entry)
         ];
         foreach ($debtsToInvoice as $debtToInvoice) {
             if ($entry->name == $debtToInvoice["person"]) {
