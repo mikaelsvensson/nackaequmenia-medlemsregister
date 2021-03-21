@@ -6,3 +6,5 @@
 /config.ini
 *.apps.googleusercontent.com.json
 /archive/
+/v2/config.ini
+/v2/.htpasswd
