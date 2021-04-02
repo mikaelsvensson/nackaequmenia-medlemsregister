@@ -109,6 +109,11 @@ function invoices_delete_item(PDO $dbh, string $invoice_id, int $line_number)
 
 function invoices_get(PDO $dbh, string $invoice_id)
 {
+    return current(invoices_get_all($dbh, 'inv.invoice_id = :invoice_id', ['invoice_id' => $invoice_id]));
+}
+
+function invoices_get_all(PDO $dbh, string $sql_where = '', array $sql_params = [])
+{
     $stmt = $dbh->prepare('
         SELECT 
             inv.*, 
@@ -119,51 +124,51 @@ function invoices_get(PDO $dbh, string $invoice_id)
             EXISTS(SELECT invlog_invalidated.invoice_id FROM invoices_log AS invlog_invalidated WHERE invlog_invalidated.action = :action_invalidated AND invlog_invalidated.invoice_id = inv.invoice_id) is_invalidated 
         FROM 
             invoices AS inv 
-        WHERE 
-            inv.invoice_id = :invoice_id');
-    $stmt->bindValue(':invoice_id', $invoice_id);
+        ' . (!empty($sql_where) ? " WHERE " . $sql_where : ''));
+    foreach ($sql_params as $param => $value) {
+        $stmt->bindValue(":" . $param, $value);
+    }
     $stmt->bindValue(':action_created', INVOICE_ACTION_CREATED);
     $stmt->bindValue(':action_ready', INVOICE_ACTION_READY);
     $stmt->bindValue(':action_sent', INVOICE_ACTION_SENT);
     $stmt->bindValue(':action_paid', INVOICE_ACTION_PAID);
     $stmt->bindValue(':action_invalidated', INVOICE_ACTION_INVALIDATED);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_OBJ);
+    $invoices = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    if ($result === false) {
-        return false;
+    foreach ($invoices as $result) {
+        $invoice_id = $result->invoice_id;
+        $stmt = $dbh->prepare('
+            SELECT 
+                created_at,
+                action,
+                action_data 
+            FROM 
+                invoices_log 
+            WHERE 
+                invoice_id = :invoice_id');
+        $stmt->bindValue(':invoice_id', $invoice_id);
+        $stmt->execute();
+
+        $result->log = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $stmt = $dbh->prepare('
+            SELECT 
+                line_number,
+                text,
+                unit_count,
+                unit_price 
+            FROM 
+                invoices_lines 
+            WHERE 
+                invoice_id = :invoice_id');
+        $stmt->bindValue(':invoice_id', $invoice_id);
+        $stmt->execute();
+
+        $result->items = $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    $stmt = $dbh->prepare('
-        SELECT 
-            created_at,
-            action,
-            action_data 
-        FROM 
-            invoices_log 
-        WHERE 
-            invoice_id = :invoice_id');
-    $stmt->bindValue(':invoice_id', $invoice_id);
-    $stmt->execute();
-
-    $result->log = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-    $stmt = $dbh->prepare('
-        SELECT 
-            line_number,
-            text,
-            unit_count,
-            unit_price 
-        FROM 
-            invoices_lines 
-        WHERE 
-            invoice_id = :invoice_id');
-    $stmt->bindValue(':invoice_id', $invoice_id);
-    $stmt->execute();
-
-    $result->items = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-    return $result;
+    return $invoices;
 }
 
 function invoices_create_for_person(PDO $dbh, string $person_id)

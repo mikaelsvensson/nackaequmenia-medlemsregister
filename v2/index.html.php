@@ -28,6 +28,7 @@
         ?>
 
         <p><a href="import.php">Importera...</a></p>
+        <p><a href="invoices.php">Alla fakturor...</a></p>
     </div>
 </section>
 </body>
