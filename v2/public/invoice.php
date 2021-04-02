@@ -11,12 +11,12 @@ if ($invoice === false) {
     return;
 }
 
-$ready_log_action = current(array_filter($invoice->log, function ($log) {
+$rendered_log_action = current(array_filter($invoice->log, function ($log) {
     return $log->action === INVOICE_ACTION_RENDERED && strlen($log->action_data) > 2;
 }));
 
-if ($ready_log_action) {
-    $data = json_decode($ready_log_action->action_data, true);
+if ($rendered_log_action) {
+    $data = json_decode($rendered_log_action->action_data, true);
     if ($_GET['format'] == 'pdf') {
         $path = __DIR__ . '/../' . $data['pdf_path'];
         $content_type = 'application/pdf';

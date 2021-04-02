@@ -193,7 +193,7 @@ function invoices_log_action(PDO $dbh, string $invoice_id, string $action, array
     $stmt->bindValue(':invoice_id', $invoice_id);
     $stmt->bindValue(':created_at', time());
     $stmt->bindValue(':action', $action);
-    $stmt->bindValue(':action_data', json_encode($action_data, JSON_FORCE_OBJECT | JSON_UNESCAPED_SLASHES));
+    $stmt->bindValue(':action_data', json_encode($action_data, JSON_UNESCAPED_SLASHES));
     if ($stmt->execute() === false) {
         die('Failed to create invoice metadata');
     };
@@ -202,6 +202,8 @@ function invoices_log_action(PDO $dbh, string $invoice_id, string $action, array
 function invoices_set_ready(PDO $dbh, object $invoice)
 {
     invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_READY, []);
+
+    $invoice = invoices_get($dbh, $invoice->invoice_id);
 
     $html = invoices_render_html($dbh, $invoice);
 
