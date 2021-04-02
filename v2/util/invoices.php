@@ -207,9 +207,9 @@ function invoices_set_ready(PDO $dbh, object $invoice)
 
     $html = invoices_render_html($dbh, $invoice);
 
-    $relative_path_html = invoices_save_as_html($invoice, $html);
+    $relative_path_html = invoices_save_as_html($dbh, $invoice, $html);
 
-    $relative_path_pdf = invoices_save_as_pdf($invoice, $html);
+    $relative_path_pdf = invoices_save_as_pdf($dbh, $invoice, $html);
 
     invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_RENDERED, [
         'html_path' => $relative_path_html,
@@ -222,7 +222,7 @@ function invoices_set_ready(PDO $dbh, object $invoice)
  * @param string $html
  * @return string
  */
-function invoices_save_as_pdf(object $invoice, string $html): string
+function invoices_save_as_pdf(PDO $dbh, object $invoice, string $html): string
 {
     global $config;
 
@@ -250,7 +250,7 @@ function invoices_save_as_pdf(object $invoice, string $html): string
 
     $result = file_get_contents($config['html2pdf']['endpoint'], false, $context);
 
-    return invoices_save_file($invoice, $result, $config['invoice']['rendered_pdf_file_path']);
+    return invoices_save_file($dbh, $invoice, $result, $config['invoice']['rendered_pdf_file_path']);
 }
 
 /**
@@ -258,10 +258,10 @@ function invoices_save_as_pdf(object $invoice, string $html): string
  * @param string $html
  * @return string
  */
-function invoices_save_as_html(object $invoice, string $html): string
+function invoices_save_as_html(PDO $dbh, object $invoice, string $html): string
 {
     global $config;
-    return invoices_save_file($invoice, $html, $config['invoice']['rendered_html_file_path']);
+    return invoices_save_file($dbh, $invoice, $html, $config['invoice']['rendered_html_file_path']);
 }
 
 /**
@@ -270,9 +270,9 @@ function invoices_save_as_html(object $invoice, string $html): string
  * @param string $relative_path_pattern
  * @return string
  */
-function invoices_save_file(object $invoice, $data, string $relative_path_pattern): string
+function invoices_save_file(PDO $dbh, object $invoice, $data, string $relative_path_pattern): string
 {
-    $relative_path = invoices_file_pattern($invoice, $relative_path_pattern);
+    $relative_path = invoices_file_pattern($dbh, $invoice, $relative_path_pattern);
     $absolute_path = __DIR__ . '/../' . $relative_path;
     if (!is_dir(dirname($absolute_path)) && mkdir(dirname($absolute_path), 0755, true) === false) {
         die('Could not create directory');
@@ -350,15 +350,18 @@ function invoices_render_html(PDO $dbh, object $invoice)
     return $html;
 }
 
-function invoices_file_pattern(object $invoice, string $pattern)
+function invoices_file_pattern(PDO $dbh, object $invoice, string $pattern)
 {
     $ready_log_action = current(array_filter($invoice->log, function ($log) {
         return $log->action === INVOICE_ACTION_READY;
     }));
 
+    $reference_person = db_get_person($dbh, $invoice->reference_person_id);
+
     return strtr($pattern, [
         '$year' => date('Y', $ready_log_action ? $ready_log_action->created_at : time()),
         '$invoice_id' => $invoice->invoice_id,
-        '$external_invoice_id' => $invoice->external_invoice_id
+        '$external_invoice_id' => $invoice->external_invoice_id,
+        '$name' => preg_replace('/[^a-zåäöA-ZÅÄÖ -]+/', ' ', join(' ', [$reference_person->first_name, $reference_person->sur_name]))
     ]);
 }

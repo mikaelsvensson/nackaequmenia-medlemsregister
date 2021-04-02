@@ -8,3 +8,4 @@
 /archive/
 /v2/config.ini
 /v2/.htpasswd
+/v2/lib/phpmailer/

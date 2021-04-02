@@ -8,3 +8,12 @@ $ docker run \
 
 $ docker stop medlemsregister
 $ docker rm medlemsregister
+
+
+
+## Install dependencies
+
+  mkdir -p lib/phpmailer
+  wget https://github.com/PHPMailer/PHPMailer/archive/master.zip -O phpmailer.zip.temp
+  unzip -j phpmailer.zip.temp PHPMailer-master/src/* -d lib/phpmailer
+  rm phpmailer.zip.temp

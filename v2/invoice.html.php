@@ -12,8 +12,11 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
             <ul>
                 <li><a href="index.php">Start</a></li>
-                <li><a href="person.php?id=<?= $invoice->reference_person_id ?>"><?= $reference_person->first_name ?></a></li>
-                <li class="is-active"><a href="#" aria-current="page">Faktura <?= $invoice->external_invoice_id ?></a></li>
+                <li>
+                    <a href="person.php?id=<?= $invoice->reference_person_id ?>"><?= $reference_person->first_name ?></a>
+                </li>
+                <li class="is-active"><a href="#" aria-current="page">Faktura <?= $invoice->external_invoice_id ?></a>
+                </li>
             </ul>
         </nav>
         <h1 class="title">
@@ -62,11 +65,41 @@
                 </tbody>
             </table>
 
-            <?php if ($invoice->is_ready) { ?>
-
-            <?php } else { ?>
+            <?php if (!$invoice->is_ready) { ?>
                 <button class="button" name="action" value="invoices_save">Spara ändringar</button>
                 <button class="button" name="action" value="invoices_set_ready">Lås</button>
+            <?php } ?>
+        </form>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <form action="" method="post">
+            <p class="subtitle">
+                Skicka faktura som PDF
+            </p>
+            <?php if ($invoice->is_ready) { ?>
+                <div class="field">
+                    <!--                <label class="label">Mottagare</label>-->
+                    <?php
+                    foreach ([$reference_person, $guardian_1, $guardian_2] as $person) {
+                        if (isset($person)) {
+                            if (!empty($person->email)) {
+                                $id = uniqid();
+                                printf('<div class="control"><label class="checkbox"><input type="checkbox" name="email_recipient[]" value="%s"> %s (%s)</label></div>',
+                                    $person->email,
+                                    $person->email,
+                                    join(' ', [$person->first_name, $person->sur_name]));
+                            }
+                        }
+                    }
+                    ?>
+                    <div class="buttons">
+                        <button class="button" name="action" value="invoices_send">Skicka</button>
+                    </div>
+                </div>
+            <?php } else { ?>
+                <p>Fakturan måste låsas innan den kan skickas.</p>
             <?php } ?>
         </form>
     </div>
@@ -80,6 +113,7 @@
         foreach ($invoice->log as $item) {
             $action_html = $item->action;
 //            switch ($item->action) {
+//                case INVOICE_ACTION_SENT:
 //                case INVOICE_ACTION_RENDERED:
 //                    $action_html .= $item->action_data;
 //                    break;
