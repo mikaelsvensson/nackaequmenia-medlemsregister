@@ -37,7 +37,11 @@ switch (@$_POST['action']) {
                     $attachment_name => $path
                 ];
 
-                email_send($recipients, invoices_file_pattern($dbh, $invoice, $config['invoice']['email_subject']), utf8_decode(invoices_render_html($dbh, $invoice)), $attachments);
+                email_send(
+                    $recipients,
+                    invoices_file_pattern($dbh, $invoice, $config['invoice']['email_subject']),
+                    utf8_decode(invoices_render_html($dbh, $invoice, 'invoice-mail.html.php')),
+                    $attachments);
 
                 invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_SENT, [
                     'recipients' => $recipients

@@ -16,7 +16,7 @@
 
         h1 {
             font-family: sans-serif;
-            font-size: 3em;
+            font-size: 2em;
             margin: 0;
             font-weight: normal;
         }
@@ -123,7 +123,7 @@
 <body>
 <div class="page-container">
 
-    <h1>Faktura</h1>
+    <h1>Faktura från scouterna</h1>
 
     <div class="invoice-description invoice-description-1">
         Den här fakturan gäller <?= join(' ', [$reference_person->first_name, $reference_person->sur_name]) ?>
@@ -158,7 +158,6 @@
     <?php if ($sum > 50000) { ?>
         <div class="invoice-description invoice-description-2">
             Meddela oss om ni önskar delbetala över flera månader.
-            Ange i så fall samma meddelande på samtliga delbetalningar.
         </div>
     <?php } ?>
 

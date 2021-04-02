@@ -1,8 +1,8 @@
 <?php
-require_once __DIR__.'/db.php';
-require_once __DIR__.'/checksum.php';
-require_once __DIR__.'/codes.php';
-require_once __DIR__.'/config.php';
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/checksum.php';
+require_once __DIR__ . '/codes.php';
+require_once __DIR__ . '/config.php';
 
 const INVOICE_ACTION_CREATED = 'created';
 const INVOICE_ACTION_READY = 'ready';
@@ -305,13 +305,11 @@ function invoiced_get_next_external_invoice_id(PDO $dbh)
     }
 }
 
-function invoices_render_html(PDO $dbh, object $invoice)
+function invoices_render_html(PDO $dbh, object $invoice, string $template = 'invoice-view.html.php')
 {
     $reference_person = db_get_person($dbh, $invoice->reference_person_id);
 
     $config = parse_ini_file('./config.ini', true, INI_SCANNER_TYPED);
-
-    $dbh = null;
 
     $sum = array_sum(array_map(function ($item) {
         return $item->unit_count * $item->unit_price;
@@ -335,16 +333,23 @@ function invoices_render_html(PDO $dbh, object $invoice)
         $swish_qr_code_url = code_swish_qr_code_url(
             $sum,
             $invoice->external_invoice_id);
+
+        $public_html_url = $invoice->is_ready ? invoices_file_pattern($dbh, $invoice, $config['invoice']['public_html_url']) : '';
+        $public_pdf_url = $invoice->is_ready ? invoices_file_pattern($dbh, $invoice, $config['invoice']['public_pdf_url']) : '';
     } else {
         $ready_date = null;
         $due_date = null;
 
         $bankgiro_qr_code_url = '';
         $swish_qr_code_url = '';
+        $public_html_url = '';
+        $public_pdf_url = '';
     }
 
+    $dbh = null;
+
     ob_start();
-    include __DIR__ . '/../invoice-view.html.php';
+    include __DIR__ . '/../templates/' . $template;
     $html = ob_get_contents();
     ob_end_clean();
     return $html;
