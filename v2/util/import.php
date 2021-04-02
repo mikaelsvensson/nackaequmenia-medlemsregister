@@ -98,9 +98,9 @@ function import_csv(PDO $dbh, $file_path)
                         // Pre-existing person with pre-existing guardian
                         $current_guardian = db_get_person($dbh, $current_guardian_id);
                         if ($current_guardian !== false && (
-                                import_normalize_email($current_guardian->email) === import_normalize_email($guardian_email) ||
-                                import_normalize_phone($current_guardian->phone) === import_normalize_phone($guardian_phone) ||
-                                import_normalize_name($current_guardian->first_name . $current_guardian->sur_name) === import_normalize_name($guardian_first_name . $guardian_sur_name)
+                                (!empty(import_normalize_email($guardian_email)) && import_normalize_email($current_guardian->email) === import_normalize_email($guardian_email)) ||
+                                (!empty(import_normalize_phone($guardian_phone)) && import_normalize_phone($current_guardian->phone) === import_normalize_phone($guardian_phone)) ||
+                                (!empty(import_normalize_name($guardian_first_name . $guardian_sur_name)) && import_normalize_name($current_guardian->first_name . $current_guardian->sur_name) === import_normalize_name($guardian_first_name . $guardian_sur_name))
                             )) {
                             // Pre-existing guardian is _probably_ same as guardian in import file. Don't create new one.
                             $matched_guardian_id = $current_guardian->person_id;
@@ -108,9 +108,9 @@ function import_csv(PDO $dbh, $file_path)
                     } else {
                         // New person. Look for guardian in database.
                         $matched_guardian = current(array_filter(db_get_people($dbh), function ($person) use ($guardian_email, $guardian_phone, $guardian_first_name, $guardian_sur_name) {
-                            return import_normalize_email($person->email) === import_normalize_email($guardian_email) ||
-                                import_normalize_phone($person->phone) === import_normalize_phone($guardian_phone) ||
-                                import_normalize_name($person->first_name . $person->sur_name) === import_normalize_name($guardian_first_name . $guardian_sur_name);
+                            return (!empty(import_normalize_email($guardian_email)) && import_normalize_email($person->email) === import_normalize_email($guardian_email)) ||
+                                (!empty(import_normalize_phone($guardian_phone)) && import_normalize_phone($person->phone) === import_normalize_phone($guardian_phone)) ||
+                                (!empty(import_normalize_name($guardian_first_name . $guardian_sur_name)) && import_normalize_name($person->first_name . $person->sur_name) === import_normalize_name($guardian_first_name . $guardian_sur_name));
                         }));
                         if ($matched_guardian !== false) {
                             $matched_guardian_id = $matched_guardian->person_id;

@@ -60,7 +60,8 @@ function db_migrate(PDO $dbh)
  */
 function db_get_people(PDO $dbh, string $sql_where = '', array $sql_params = []): array
 {
-    $stmt = $dbh->prepare('SELECT * FROM people AS p LEFT JOIN people_properties AS props ON p.person_id = props.person_id ' . (!empty($sql_where) ? " WHERE " . $sql_where : '') . ' ORDER BY p.person_id, created_at DESC');
+    $query = 'SELECT * FROM people AS p LEFT JOIN people_properties AS props ON p.person_id = props.person_id ' . (!empty($sql_where) ? " WHERE " . $sql_where : '') . ' ORDER BY p.person_id, props.row_id DESC';
+    $stmt = $dbh->prepare($query);
     foreach ($sql_params as $param => $value) {
         $stmt->bindValue(":" . $param, $value);
     }
@@ -70,7 +71,7 @@ function db_get_people(PDO $dbh, string $sql_where = '', array $sql_params = [])
     $last_id = null;
     $people = [];
     foreach ($all_people as $person) {
-        if ($person->person_id != $last_id) {
+        if ($last_id === null || $person->person_id != $last_id) {
             $people[] = $person;
         }
         $last_id = $person->person_id;
@@ -129,7 +130,9 @@ function db_set_person_props(PDO $dbh, string $person_id, array $new_props)
         'guardian_2_person_id'
     ];
     foreach ($allowed_props as $prop) {
-        $next_props[$prop] = isset($new_props[$prop]) ? $new_props[$prop] : ($current_props !== false ? $current_props[$prop] : null);
+        $next_props[$prop] = isset($new_props[$prop])
+            ? $new_props[$prop]
+            : ($current_props !== false ? $current_props[$prop] : null);
     }
     $next_props['person_id'] = $person_id;
     $next_props['created_at'] = time();
