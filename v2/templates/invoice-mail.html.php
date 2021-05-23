@@ -47,7 +47,8 @@
         }
 
         table.invoice-items {
-            width: 100%;
+            min-width: 20em;
+            max-width: 42em;
         }
 
         table.invoice-items tfoot td {
