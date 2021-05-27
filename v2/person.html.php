@@ -16,32 +16,43 @@
             </ul>
         </nav>
         <h1 class="title">
-            <?= $person->first_name ?>
+            <?= $person->first_name ?> <?= $person->sur_name ?>
         </h1>
         <p class="subtitle">
-            <?= $person->sur_name ?>
+            Personuppgifter
+        </p>
+
+        <p>Telefon: <a href="tel:<?= $person->phone ?>"><?= $person->phone ?></a></p>
+        <p>Epost: <a href="mailto:<?= $person->email ?>"><?= $person->email ?></a></p>
+        <p>Personnummer: <?= $person->pno ?></p>
+
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <p class="subtitle">
+            Kontaktpersoner
         </p>
         <?php
         foreach ([1, 2] as $guardian_num) {
             $guardian = ${"guardian_$guardian_num"};
             if (isset($guardian)) {
-                printf('<p><a href="person.php?id=%s">Kontakt: %s</a></p>', $guardian->person_id, $guardian->first_name);
+                printf('<p><a href="person.php?id=%s">%s</a></p>', $guardian->person_id, $guardian->first_name);
             }
-        }
-        foreach ($children as $child) {
-            printf('<p><a href="person.php?id=%s">Barn: %s</a></p>', $child->person_id, $child->first_name);
         }
         ?>
-
-        <table class="table">
-            <tbody>
-            <?php
-            foreach (get_object_vars($person) as $prop => $value) {
-                printf('<tr><td>%s</td><td>%s</td></tr>', $prop, $value);
-            }
-            ?>
-            </tbody>
-        </table>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <p class="subtitle">
+            Barn
+        </p>
+        <?php
+        foreach ($children as $child) {
+            printf('<p><a href="person.php?id=%s">%s</a></p>', $child->person_id, $child->first_name);
+        }
+        ?>
     </div>
 </section>
 <section class="section">

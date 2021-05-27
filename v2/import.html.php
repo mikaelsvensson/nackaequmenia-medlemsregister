@@ -27,12 +27,32 @@
                 Importera från Repet
             </p>
 
+            <div class="content">
+                <p>Gör så här för att skapa importfilen:</p>
+                <ul>
+                    <li>Logga in i Repet.</li>
+                    <li>Se till så att du har rollen <em>E-LokalAdmin</em> (andra roller kan inte exportera fullständigt personnummer).</li>
+                    <li>
+                        Skapa rapporten <em>Närvarokort inkl persnr</em> med följande inställningar:
+                        <ul>
+                            <li>Huvudgrupp: Scout</li>
+                            <li>Undergrupp: Alla undergrupper</li>
+                            <li>Grupp: Alla grupper</li>
+                            <li>År och Terminen: (Senaste terminen)</li>
+                        </ul>
+                    </li>
+                    <li>Kör rapport.</li>
+                    <li>Exportera som <em>MHTML (web archive)</em>.</li>
+                    <li>Välj filen här nedan.</li>
+                </ul>
+            </div>
+
             <div class="file">
                 <label class="file-label">
                     <input class="file-input" type="file" name="file">
                     <span class="file-cta">
                         <span class="file-label">
-                            Choose a file…
+                            Välj fil…
                         </span>
                     </span>
                 </label>
@@ -46,12 +66,32 @@
                 Importera från CSV
             </p>
 
+            <div class="content">
+                <p>Importfilen ska vara en "kommaseparerad CSV-fil" med exakt dessa kolumner:</p>
+                <ul>
+                    <li>Deltagare, Personnummer</li>
+                    <li>Deltagare, Telefonnummer</li>
+                    <li>Deltagare, E-postadress</li>
+                    <li>Deltagare, Gatuadress</li>
+                    <li>Deltagare, Postort</li>
+                    <li>Deltagare, Medicinsk notering</li>
+                    <li>Vårdnadshavare 1, Förnamn</li>
+                    <li>Vårdnadshavare 1, Efternamn</li>
+                    <li>Vårdnadshavare 1, E-postadress</li>
+                    <li>Vårdnadshavare 1, Telefon</li>
+                    <li>Vårdnadshavare 2, Förnamn</li>
+                    <li>Vårdnadshavare 2, Efternamn</li>
+                    <li>Vårdnadshavare 2, E-postadress</li>
+                    <li>Vårdnadshavare 2, Telefon</li>
+                </ul>
+            </div>
+
             <div class="file">
                 <label class="file-label">
                     <input class="file-input" type="file" name="file">
                     <span class="file-cta">
                         <span class="file-label">
-                            Choose a file…
+                            Välj fil…
                         </span>
                     </span>
                 </label>
