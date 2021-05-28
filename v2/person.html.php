@@ -22,39 +22,45 @@
             Personuppgifter
         </p>
 
-        <p>Telefon: <a href="tel:<?= $person->phone ?>"><?= $person->phone ?></a></p>
-        <p>Epost: <a href="mailto:<?= $person->email ?>"><?= $person->email ?></a></p>
-        <p>Personnummer: <?= $person->pno ?></p>
+        <table class="table"><tbody>
+            <tr><td>Telefon:</td><td><a href="tel:<?= $person->phone ?>"><?= $person->phone ?></a></td></tr>
+            <tr><td>Epost:</td><td><a href="mailto:<?= $person->email ?>"><?= $person->email ?></a></td></tr>
+            <tr><td>Personnummer:</td><td><?= $person->pno ?></td></tr>
+        </tbody></table>
 
     </div>
 </section>
-<section class="section">
-    <div class="container">
-        <p class="subtitle">
-            Kontaktpersoner
-        </p>
-        <?php
-        foreach ([1, 2] as $guardian_num) {
-            $guardian = ${"guardian_$guardian_num"};
-            if (isset($guardian)) {
-                printf('<p><a href="person.php?id=%s">%s</a></p>', $guardian->person_id, $guardian->first_name);
+<?php if (count($children) > 0) { ?>
+    <section class="section">
+        <div class="container">
+            <p class="subtitle">
+                Kontaktpersoner
+            </p>
+            <?php
+            foreach ([1, 2] as $guardian_num) {
+                $guardian = ${"guardian_$guardian_num"};
+                if (isset($guardian)) {
+                    printf('<p><a href="person.php?id=%s">%s</a></p>', $guardian->person_id, $guardian->first_name);
+                }
             }
-        }
-        ?>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-        <p class="subtitle">
-            Barn
-        </p>
-        <?php
-        foreach ($children as $child) {
-            printf('<p><a href="person.php?id=%s">%s</a></p>', $child->person_id, $child->first_name);
-        }
-        ?>
-    </div>
-</section>
+            ?>
+        </div>
+    </section>
+<?php } ?>
+<?php if (count($children) > 0) { ?>
+    <section class="section">
+        <div class="container">
+            <p class="subtitle">
+                Barn
+            </p>
+            <?php
+            foreach ($children as $child) {
+                printf('<p><a href="person.php?id=%s">%s</a></p>', $child->person_id, $child->first_name);
+            }
+            ?>
+        </div>
+    </section>
+<?php } ?>
 <section class="section">
     <div class="container">
         <p class="subtitle">
