@@ -30,7 +30,7 @@
 
     </div>
 </section>
-<?php if (count($children) > 0) { ?>
+<?php if (isset($guardian_1) || isset($guardian_2)) { ?>
     <section class="section">
         <div class="container">
             <p class="subtitle">
