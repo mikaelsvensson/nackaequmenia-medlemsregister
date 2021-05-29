@@ -16,12 +16,20 @@
         </nav>
         <div class="columns">
             <div class="column">
-                <p class="subtitle">Personer</p>
                 <?php
-                foreach ($people as $person) {
-                    printf('<p><a href="person.php?id=%s"><strong>%s</strong> %s</a>%s</p>', $person->person_id, $person->first_name ?? $person->pno ?? $person->person_id, $person->sur_name,
-                    isset($person->guardian_1_person_id) || isset($person->guardian_1_person_id) ? ' <span class="tag is-light">Scout</span>' : '');
-                }
+                foreach ($people_groups as $group => $people) {
+                    if (count($people) > 0) {
+                        printf('<p class="subtitle">Personer %s år</p>', $group);
+                        foreach ($people as $person) {
+                            printf('<p><a href="person.php?id=%s"><strong>%s</strong> %s</a></p>', 
+                                $person->person_id, 
+                                $person->first_name ?? $person->pno ?? $person->person_id, 
+                                $person->sur_name
+                            );
+                        }
+                        print str_repeat('<br>', 3);
+                    }
+                }        
                 ?>
                 <p><a href="import.php">Importera...</a></p>
             </div>
