@@ -28,3 +28,15 @@ Do this:
   wget https://github.com/PHPMailer/PHPMailer/archive/master.zip -O phpmailer.zip.temp
   unzip -j phpmailer.zip.temp PHPMailer-master/src/* -d lib/phpmailer
   rm phpmailer.zip.temp
+
+## Deploy using SFTP
+
+Full deploy:
+
+    $ cd _deploy
+    $ ./v2-full.sh user@server
+
+Only deploy configuration file:
+
+    $ cd _deploy
+    $ ./v2-config.sh user@server

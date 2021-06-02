@@ -1,5 +1,7 @@
 *.iml
 /.idea/
+/.idea-old/
+/.vscode/
 /.htaccess
 /.htpasswd
 /vendor/
@@ -7,6 +9,10 @@
 *.apps.googleusercontent.com.json
 /archive/
 /v2/config.ini
+/v2/config.prod.ini
+/v2/db.sqlite3
 /v2/.htpasswd
 /v2/lib/phpmailer/
 /v2/temp/
+.DS_Store
+_deploy/deploy-temp/
