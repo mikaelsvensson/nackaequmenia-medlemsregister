@@ -1,0 +1,5 @@
+AuthName "Medlemsregistret"
+AuthType Basic
+AuthUserFile /var/www/html/.htpasswd
+#AuthGroupFile /dev/null
+require valid-user

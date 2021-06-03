@@ -1,0 +1,5 @@
+AuthName "Medlemsregistret"
+AuthType Basic
+AuthUserFile /customers/9/2/a/nackasmu.se/httpd.www/medlemsregister/.htpasswd
+AuthGroupFile /dev/null
+require valid-user
