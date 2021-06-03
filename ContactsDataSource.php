@@ -125,7 +125,7 @@ class ExternalContactsDataSource extends ContactsDataSource
     protected function loadEntries()
     {
         $entries = array_slice(
-            $this->loadCsvFile('https://docs.google.com/spreadsheets/d/1zCXwCl4420FiTEmpOjC3ObW8U3e-GXP8QyUNIWJStSQ/pub?gid=357434992&single=true&output=tsv'),
+            $this->loadCsvFile('./temp-ExternalContactsDataSource.tsv'),
             1);
 
         $contacts = array_map(function ($entry) {
@@ -185,7 +185,7 @@ class InternalContactsDataSource extends ContactsDataSource
 {
     protected function loadEntries()
     {
-        $entries = $this->loadCsvFile("https://docs.google.com/spreadsheets/d/1Kr2X17DX5N9MQvNFXLjrfuVTAh6Q7HcxALxkfmBwZJ4/pub?gid=0&single=true&output=tsv");
+        $entries = $this->loadCsvFile("./temp-InternalContactsDataSource.tsv");
 
         $contacts = array_map(function ($entry) {
             $contact = new Contact();

@@ -6,6 +6,7 @@ include 'core-page-start.php';
 require_once 'ContactsDataSource.php';
 
 $contactsDataSource = new \contacts\MergedContactDataSource();
+//$contactsDataSource = new \contacts\InternalContactsDataSource();
 $entries = $contactsDataSource->getEntries();
 ?>
 <form action="google.php" method="post">
