@@ -29,10 +29,8 @@ mv $TEMPDIR/config.prod.ini $TEMPDIR/config.ini
 ## Copy
 
 sftp ${SFTP_CONNECTION} <<EOF
-pwd
+mkdir medlemsregister
 cd medlemsregister
-mkdir v2
-cd v2
 put -r ${TEMPDIR}/*
 exit
 EOF
