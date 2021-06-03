@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Chiffer: Bokstavsposition ur lång text</title>
+
+    <script src="jquery-3.1.0.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <!--<link rel="stylesheet" href="bootstrap-theme.min.css">-->
+    <script src="cipher-textcharpos.js"></script>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <form>
+                <div class="form-group">
+                    <label for="key-text">Nyckel</label>
+                    <textarea id="key-text" class="form-control" rows="10"></textarea>
+                    <div id="key-text-presets"></div>
+                </div>
+                <div class="form-group">
+                    <label for="source-text">Meddelande</label>
+                    <textarea id="source-text" class="form-control" rows="10"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <p>Chiffertext:</p>
+            <blockquote id="cipher-text"></blockquote>
+            <div id="cipher-errors" class="text-danger"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

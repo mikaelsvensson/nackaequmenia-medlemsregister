@@ -34,7 +34,7 @@
         }
         asort($formats);
         foreach ($formats as $name => $title) {
-            printf('<p><a href="show.php?format=%s">%s</a></p>', $name, $title);
+            printf('<p><a href="playground/show.php?format=%s">%s</a></p>', $name, $title);
         }
         ?>
         -->

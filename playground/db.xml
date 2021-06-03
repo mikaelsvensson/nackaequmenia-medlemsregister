@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--<?xml-stylesheet type="text/xsl" href="persons-only.xsl"?>-->
+
+<data>
+    <person name="Adam" ssn="" left="innan 2013"></person>
+    <person name="Adam Sandström" ssn="950928" left="2006">
+        <phone number="08-715 66 67" />
+        <address street="Valövägen 16" postal="132 34 Saltsjö-Boo" />
+    </person>
+    <person name="Agnes Karén" group="Kaessler" ssn="19990430-5126" allergies="Nötter i mat">
+        <emailAddress address="agnesk.jp@skola.pysslingen.net" />
+        <address street="Kurirvägen 8" postal="132 45 Saltsjö-Boo" />
+        <parent name="Sofia Wadensjö Karén">
+            <emailAddress address="Sofia.WadensjoKaren@vi-tidningen.se" />
+            <emailAddress address="sofia.wadensjo@vi-tidningen.se" />
+            <phone number="0705-367159" />
+        </parent>
+        <parent name="Fredric Karén">
+            <emailAddress address="fredric.karen@svd.se" />
+            <photo url="Fredric Karen.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Agnes Nyberg" ssn="981016" left="2009">
+        <phone number="08-7180037" />
+        <address street="Tessinvägen 27" postal="132 39 Saltsjö-Boo" />
+        <parent name="Magnus">
+            <emailAddress address="magnus@m-n.se" />
+            <phone number="070-7518020" />
+        </parent>
+    </person>
+    <person name="Alba Heinemann" group="Papigrarna" ssn="20020802-6229" allergies="Lätt hästallergi">
+        <address street="Hindvägen 11" postal="132 48 Saltsjö-Boo" />
+        <parent name="Maria Heinemann">
+            <emailAddress address="heinemannmaria@hotmail.com" />
+            <phone number="0708-813179" />
+            <photo url="Maria Heinemann.jpg" />
+        </parent>
+        <parent name="David Heinemann">
+            <emailAddress address="dahe05@handelsbanken.se" />
+            <phone number="0761-460066" />
+            <photo url="David Heinemann.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Albin Blomgren" group="Lilla kakorna" ssn="20040229-6776" allergies="Pollen, äpple, kiwi, päron-kärnfrukter, morot.">
+        <address street="Bordtennisvägen 3" postal="132 43 Saltsjö-Boo" />
+        <note>Lätt ansträngningsastma.</note>
+        <parent name="Johan Blomgren">
+            <emailAddress address="johan.blomgren@nacka.se" />
+            <phone number="076-396 87 79" />
+            <photo url="Johan Blomgren.jpg" />
+        </parent>
+        <parent name="Tanja Neiminen">
+            <phone number="0733-6837791" />
+            <emailAddress address="tanja_neiminen@hotmail.com" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="N" namePermitted="N" />
+    </person>
+    <person name="Albin Öhnström" group="Papigrarna" ssn="20020730-9279">
+        <emailAddress address="ohnstrom@home.se" />
+        <phone number="+46730620871" />
+        <phone number="08-668 97 96" />
+        <address street="Kaptensvägen 3" postal="132 46 Saltsjö-Boo" />
+        <parent name="Katarina Perlhagen">
+            <emailAddress address="perlhagen@home.se" />
+            <phone number="0708-866822" />
+            <photo url="Katarina Perlhagen.jpg" />
+        </parent>
+        <parent name="Martin Öhnström">
+            <phone number="070 668 9796" />
+            <photo url="Martin Ohnstrom.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Alexander Danielsson" ssn="990111" left="2009">
+        <address street="Storholmsvägen 18" postal="132 52 Saltsjö-Boo" />
+        <parent name="Mona Danielsson"></parent>
+    </person>
+    <person name="Alexander Gahn" ssn="1995" left="2003">
+        <address street="Evastigen 1" postal="132 35 Saltsjö-Boo" />
+    </person>
+    <person name="Alexandra Ericsson" group="Liljorna" ssn="20041208-8049" allergies="Nej">
+        <address street="Hermelinsvägen 10" postal="132 46 Saltsjö-Boo" />
+        <parent name="Katarina Ericsson">
+            <emailAddress address="katarina.ericsson@yahoo.com" />
+            <phone number="070-972 25 00" />
+        </parent>
+        <parent name="Tobias Ericsson">
+            <emailAddress address="tobiasericsson@yahoo.com" />
+            <phone number="070-663 44 72" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Alice Gellborn Hallborg" group="Liljorna" ssn="20030813-2760" left="innan 2013">
+        <address street="Platåvägen 14" postal="132 48 Saltsjö-Boo" />
+        <parent name="Carola Gellborn">
+            <emailAddress address="cgellborn@hotmail.com" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="N" namePermitted="J" />
+    </person>
+    <person name="Alva Sundqvist" group="Liljorna" ssn="20030528-8987" left="innan 2013">
+        <address street="Platåvägen 4" postal="132 48 Saltsjö-Boo" />
+        <parent name="Anders Johansson">
+            <emailAddress address="anders.j.johansson@ramboll.se" />
+            <phone number="+46706946320" />
+        </parent>
+        <parent name="Katarina Sundqvist">
+            <emailAddress address="katarina.sundqvist@nacka.se" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="N" namePermitted="J" />
+    </person>
+    <person name="Amanda Mårtensson" ssn="19990920" left="2010 vt">
+        <phone number="08-7160371" />
+        <address street="Lövdalsvägen 3b" postal="132 41 Saltsjö-Boo" />
+        <parent name="Nathalie Mårtensson">
+            <emailAddress address="nathalie.martensson@colliers.se" />
+        </parent>
+    </person>
+    <person name="Amanda Starck" ssn="20010210" left="2009">
+        <address street="Lövdalsvägen 30" postal="132 41 Saltsjö-Boo" />
+        <parent name="Mattias Starck"></parent>
+    </person>
+    <person name="Anders Steen" ssn="19530824-0059">
+        <emailAddress address="anders.steen@hotmail.com" />
+        <phone number="08-715 61 67" />
+        <address street="Hagvägen 4" postal="132 31 Saltsjö-Boo" />
+    </person>
+    <person name="Anna Bock" ssn="19880617-6221" allergies="Mkt men inget allvarligt">
+        <emailAddress address="bock.anna@gmail.com" />
+        <phone number="070-2955436" />
+        <address street="Sannadalsvägen 20" postal="117 65 Stockholm" />
+        <note>Fab!</note>
+    </person>
+    <person name="Anna Isakka" ssn="1993" left="2002">
+        <phone number="08-718 54 79" />
+        <address street="Apollovägen 18" postal="132 44 Saltsjö-Boo" />
+    </person>
+    <person name="Anna Steen" ssn="19891202-0081">
+        <emailAddress address="anna_steen89@hotmail.com" />
+        <phone number="070-7300926" />
+        <phone number="08-715 61 67" />
+        <address street="Bjursätragatan 89" postal="124 63 Bandhagen" />
+    </person>
+    <person name="Anton Svensson" ssn="1995" left="2005">
+        <phone number="08-715 00 38" />
+        <address street="Åsavägen 1E" postal="132 44 Saltsjö-Boo" />
+    </person>
+    <person name="Astrid Ymén" group="Kaessler" ssn="19991021-3785" allergies="Laktosintolerant">
+        <emailAddress address="astrid.ymen@hotmail.com" />
+        <phone number="08-7152017" />
+        <address street="Gundersbergsvägen 8" postal="132 48 Saltsjö-Boo" />
+        <parent name="Maria Stein Ymén">
+            <emailAddress address="stein.ymen@glocalnet.net" />
+            <photo url="Maria Stein Ymen.jpg" />
+        </parent>
+        <parent name="Ingvar Ymén">
+            <emailAddress address="stein.ymen@glocalnet.net" />
+            <phone number="070-1152221" />
+            <photo url="Ingvar Ymen.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Calle Steen" ssn="941028" left="2006">
+        <phone number="08-715 6167" />
+        <address street="Hagvägen 4" postal="132 52 Saltsjö-Boo" />
+    </person>
+    <person name="Carolina Sigemo" group="Kaessler" ssn="19940422-5022">
+        <emailAddress address="carro.94@hotmail.com" />
+        <phone number="073-7236322" />
+        <phone number="08-715 60 22" />
+        <address street="Fältvägen 37" postal="132 35 Saltsjö-Boo" />
+        <parent name="Anna-Maja Sigemo">
+            <emailAddress address="annamaja.sigemo@gmail.com" />
+            <phone number="070-4994421" />
+            <photo url="Anna-Maja Sigemo.jpg" />
+        </parent>
+        <parent name="Åke Sigemo"></parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Cassandra Holmberg" group="Liljorna" ssn="20030922-3121" allergies="Mjölk/laktosintolerant">
+        <phone number="072-5229922" />
+        <address street="Skjutbanevägen 5" postal="13243 Saltsjö-Boo" />
+        <parent name="Lesley Fitzpatrick">
+            <emailAddress address="lesleyfitzpatrick@yahoo.com" />
+            <phone number="0768-17992" />
+            <photo url="Lesley Fitzpatrick.jpg" />
+        </parent>
+        <parent name="Sam Holmberg">
+            <emailAddress address="sam.holmberg@radissonblu.com" />
+            <phone number="076-1079922" />
+            <photo url="Sam Holmberg.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Damian Hansson" ssn="1998" left="2010 ht">
+        <parent name="Camilla Hansson">
+            <emailAddress address="desmonia@gmail.com" />
+        </parent>
+    </person>
+    <person name="Daniel Lövgren" ssn="960202" left="2009">
+        <phone number="08-715 99 35" />
+        <address street="Björkholmsvägen 17" postal="132 52 Saltsjö-Boo" />
+    </person>
+    <person name="Elin Raab" ssn="19991111" left="2010">
+        <phone number="08-326664" />
+        <address street="Anarisvägen 14" postal="132 42 Saltsjö-Boo" />
+        <parent name="Annika Raab">
+            <emailAddress address="annika.raab@stadshuset.stockholm.se" />
+        </parent>
+        <parent name="Olof Raab">
+            <emailAddress address="raab.o@telia.com" />
+        </parent>
+    </person>
+    <person name="Ellen Ekström-Hillerteg" group="Papigrarna" ssn="20010219-4487">
+        <emailAddress address="ellen.ekstrom@gmail.com" />
+        <phone number="0709-103377" />
+        <phone number="08-7157672" />
+        <address street="Fäbodvägen 9" postal="132 35 Saltsjö-Boo" />
+        <parent name="Peo Ekström">
+            <emailAddress address="peo.ekstrom@gmail.com" />
+            <phone number="0738-52 73 99" />
+        </parent>
+        <parent name="Annika Ekström-Hillerteg">
+            <emailAddress address="annika.hillerteg@gmail.com" />
+            <phone number="072-1999915" />
+            <photo url="Annika Ekstrom-Hillerteg.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Elliot Persson" ssn="20010410" left="2009">
+        <phone number="08-7478812" />
+        <address street="Vasaviksvägen 10" postal="132 39 Saltsjö-Boo" />
+        <parent name="">
+            <emailAddress address="familjen_persson@telia.com" />
+            <phone number="070-9998812" />
+        </parent>
+        <parent name="Mamma">
+            <phone number="0734-274202" />
+        </parent>
+    </person>
+    <person name="Emil Buss" ssn="20010414-2591" allergies="Pollen, pälsdjur, röda äpplen samt morötter, tomater, blomkål och grön paprika om inte grönsakerna kokas först.">
+        <phone number="0733-458932" />
+        <phone number="08-39 22 25" />
+        <address street="Styrbordsvägen 7" postal="13246 Saltsjö-Boo" />
+        <parent name="Lena Pettersson">
+            <emailAddress address="lena.buss@gmail.com" />
+            <emailAddress address="lepes@telia.com" />
+            <phone number="0733-458908" />
+        </parent>
+        <parent name="Tony Buss">
+            <emailAddress address="tony.buss@telia.com" />
+            <phone number="0733-458904" />
+            <photo url="Tony Buss.jpg" />
+        </parent>
+    </person>
+    <person name="Tova Buss" ssn="20040825-8002" allergies="Inga allergier">
+        <address street="Styrbordsvägen 7" postal="13246 Saltsjö-Boo" />
+        <phone number="08-39 22 25" />
+        <parent name="Lena Pettersson">
+            <emailAddress address="lena.buss@gmail.com" />
+            <emailAddress address="lepes@telia.com" />
+            <phone number="0733-458908" />
+        </parent>
+        <parent name="Tony Buss">
+            <emailAddress address="tony.buss@telia.com" />
+            <phone number="0733-458904" />
+            <photo url="Tony Buss.jpg" />
+        </parent>
+    </person>
+    <person name="Erik Nyberg" ssn="20010225" left="2009">
+        <phone number="08-7180037" />
+        <address street="Tessinvägen 27" postal="132 39 Saltsjö-Boo" />
+        <parent name="Magnus">
+            <emailAddress address="magnus@m-n.se" />
+            <phone number="070-7518020" />
+        </parent>
+    </person>
+    <person name="Fanny Johansson" group="Kaessler" ssn="19930711">
+        <emailAddress address="fanny93_50@hotmail.com" />
+        <phone number="076-2813360" />
+        <phone number="073-9590820" />
+        <address street="Åsvägen 8" postal="133 41 Gustavsberg" />
+        <parent name="Jasmine Johansson">
+            <phone number="070-8356095" />
+        </parent>
+    </person>
+    <person name="Felicia Baneryd" group="Papigrarna" ssn="20001210-3289" left="innan 2013">
+        <phone number="08-7185055" />
+        <address street="Skogalundsklippan 13" postal="131 39 Nacka" />
+        <parent name="Ann-Sofie Lundberg">
+            <emailAddress address="annsofie_lundberg@hotmail.com" />
+            <phone number="073-7589695" />
+            <photo url="Ann-Sofie Lundberg.jpg" />
+        </parent>
+    </person>
+    <person name="Filippa Ingvar" ssn="991028" left="2009">
+        <phone number="08-7184072" />
+        <address street="Dianavägen 9," postal="132 44 Saltsjö-Boo" />
+        <parent name="Love ingvar">
+            <emailAddress address="love_ingvar@yahoo.se" />
+            <phone number="070-3509530" />
+        </parent>
+        <parent name="Anne-Li">
+            <phone number="0708-658779" />
+        </parent>
+    </person>
+    <person name="Gabriella Olsson" ssn="970624" left="2008">
+        <phone number="08-747 13 44" />
+        <address street="Kulingvägen 12" postal="132 31 Saltsjö-Boo" />
+    </person>
+    <person name="Gunilla Städje" group="Kaessler" ssn="19961124-7280">
+        <emailAddress address="gun_illa@hotmail.com" />
+        <phone number="073-9694031" />
+        <phone number="08-556 600 66" />
+        <address street="Ormingeringen 55 B" postal="132 33 Saltsjö-Boo" />
+        <parent name="Audrone Städje">
+            <emailAddress address="audrone@qedata.se" />
+        </parent>
+        <parent name="Jörgen Städje">
+            <emailAddress address="jorgen@qedata.se" />
+        </parent>
+    </person>
+    <person name="Hanna" ssn="2004mmnn-nnnn" left="innan 2013">
+        <parent name="Sara Mothander">
+            <emailAddress address="Familjen.mothander@gmail.com" />
+            <phone number="0739-64 06 41" />
+        </parent>
+    </person>
+    <person name="Helena Olsson" group="Kaessler" ssn="19940701-4563">
+        <emailAddress address="helena_olsson@msn.com" />
+        <phone number="073-3837448" />
+        <phone number="08-747 13 44" />
+        <address street="Kulingvägen 12" postal="132 31 Saltsjö-Boo" />
+        <parent name="Anna Olsson"></parent>
+    </person>
+    <person name="Hugo Björklund" group="Papigrarna" ssn="20011208-1914">
+        <phone number="08-6518026" />
+        <address street="Kompassvägen 20" postal="132 46 Saltsjö-Boo" />
+        <parent name="Ulrika Kronqvist">
+            <emailAddress address="ulrika.k@telia.com" />
+            <phone number="0708-980163" />
+            <photo url="Ulrika Kronqvist.jpg" />
+        </parent>
+        <parent name="Mats Björklund">
+            <emailAddress address="mats.gb@telia.com" />
+            <phone number="0708-89 99 99" />
+        </parent>
+        <note>https://twitter.com/HugoBjrklund</note>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Ida Stenberg" group="Kaessler" ssn="19930305-4523">
+        <emailAddress address="idastenberg@hotmail.com" />
+        <phone number="073-9590820" />
+        <phone number="073-9590820" />
+        <address street="Hasselbacken 1" postal="139 33 Värmdö" />
+        <parent name="Tina Piispanen">
+            <phone number="070-7461073" />
+        </parent>
+    </person>
+    <person name="Iris Öhnström" group="Kaessler" ssn="19950906-0324">
+        <emailAddress address="iris.ohnstrom@hotmail.com" />
+        <phone number="070-3037569" />
+        <phone number="08-668 97 96" />
+        <address street="Kaptensvägen 3" postal="132 46 Saltsjö-Boo" />
+        <parent name="Katarina Perlhagen">
+            <emailAddress address="perlhagen@home.se" />
+            <phone number="0708-866822" />
+            <photo url="Katarina Perlhagen.jpg" />
+        </parent>
+        <parent name="Martin Öhnström">
+            <phone number="070 668 9796" />
+            <photo url="Martin Ohnstrom.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Isak Wallström Blomgren" group="Lilla kakorna" ssn="20030520-6492">
+        <address street="Kocktorpsvägen 10" postal="13243 Saltsjö-Boo" />
+        <parent name="Tove Wallström">
+            <phone number="073-7058968" />
+            <emailAddress address="tove.wallstrom@sodersjukhuset.se" />
+            <photo url="Tove Wallstrom.jpg" />
+        </parent>
+        <parent name="Marcus Wallström Blomgren">
+            <phone number="070-7890330" />
+            <photo url="Marcus Wallstrom Blomgren.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Jacob" ssn="2002mmnn-nnnn" left="innan 2013">
+        <parent name="Sara Mothander">
+            <emailAddress address="Familjen.mothander@gmail.com" />
+            <phone number="0739-64 06 41" />
+        </parent>
+    </person>
+    <person name="Janina Bronius Nyberg" group="Lilla kakorna" ssn="20030121-9663" left="innan 2013">
+        <phone number="0723-259457" />
+        <address street="Strömstarevägen 72" postal="134 42 Gustavsberg" />
+        <parent name="Sari Nyberg">
+            <emailAddress address="s.nyberg07@gmail.com" />
+            <phone number="070-7996511" />
+            <address street="Strömstarevägen 72" postal="13442 Gustavsberg" />
+        </parent>
+        <parent name="Jonas Bronius">
+            <emailAddress address="jbbygg@hotmail.com" />
+            <phone number="0735-259457" />
+            <address street="Rosenbergsvägen 2" postal="Nacka" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="N" namePermitted="N" />
+    </person>
+    <person name="Johan Börjesson" ssn="1995" left="2005">
+        <phone number="08-715 19 88" />
+        <address street="Kärrstigen 38" postal="132 41 Saltsjö-Boo" />
+    </person>
+    <person name="Johan Lövgren" ssn="19990722" allergies="Gräsallergi" left="2011 vt">
+        <phone number="08-715 99 35" />
+        <address street="Björkholmsvägen 17" postal="132 52 Saltsjö-Boo" />
+        <parent name="Anna Hirsch">
+            <emailAddress address="anna.hirsch@telia.com" />
+            <phone number="0706810360" />
+        </parent>
+    </person>
+    <person name="Johannes Ljusteräng" ssn="1995" left="2005">
+        <phone number="08-668 68 01" />
+        <address street="Junkersvägen 12" postal="132 45 Saltsjö-Boo" />
+    </person>
+    <person name="Linnea Eriksson" group="Kaessler" ssn="19990110-6444" allergies="Pollen, gräs.">
+        <phone number="08 -7158757" />
+        <address street="Kocktorpsvägen 71" postal="132 43 Saltsjö-Boo" />
+        <parent name="Marithe Eriksson">
+            <emailAddress address="marithe.eriksson@stockholm.se" />
+            <phone number="070-2919699" />
+        </parent>
+        <parent name="Rolle Eriksson">
+            <phone number="070 587 96 90" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Louise Vilhelmson" ssn="19991010" left="2011 vt">
+        <phone number="louise.1010@hotmail.com" />
+        <address street="Hjortvägen 48" postal="132 45 Saltsjö-Boo" />
+        <parent name="Leif Vilhelmson (Håkansson?)">
+            <phone number="0709328850" />
+        </parent>
+    </person>
+    <person name="Louise Öferström" ssn="1997" left="2006">
+        <phone number="08-747 16 38" />
+        <address street="Badsjöstigen 21" postal="132 45 Saltsjö-Boo" />
+    </person>
+    <person name="Love Holst Norin" group="Papigrarna" ssn="20011105-0035">
+        <emailAddress address="loveholstnorin@gmail.com" />
+        <phone number="08-7158788" />
+        <address street="Husarvägen 10" postal="132 37 Saltsjö-Boo" />
+        <parent name="Sarah Holst">
+            <emailAddress address="sarahholst9@gmail.com" />
+            <phone number="070-7177101" />
+            <photo url="Sarah Holst.jpg" />
+        </parent>
+        <parent name="Olov Norin">
+            <emailAddress address="olovnorin@hotmail.com" />
+            <phone number="070-7897101" />
+            <photo url="Olov Norin.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="N" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Lukas Täfvander" group="Liljorna" ssn="20030416-2415" allergies="Nej" left="innan 2013">
+        <phone number="08-718 02 53" />
+        <address street="Njordvägen 6" postal="132 48 Saltsjö-Boo" />
+        <parent name="Helen Täfvander">
+            <emailAddress address="helennacka@hotmail.com" />
+            <phone number="072-5398357" />
+        </parent>
+        <parent name="Thomas Fafoutis">
+            <emailAddress address="thomas.fafoutis@mawell.com" />
+            <phone number="070-5303032" />
+        </parent>
+    </person>
+    <person name="Magdalena Hamlin" ssn="19920101-0460"></person>
+    <person name="Maja Jakobsson" ssn="950808" left="2008">
+        <phone number="08-7477662" />
+        <address street="Dianav 21" postal="13244 Saltsjö-Boo" />
+    </person>
+    <person name="Malcon" ssn="" left="2011 vt">
+        <parent name="Ann-Sofie Lundberg">
+            <emailAddress address="Annsofie_lundberg@hotmail.com" />
+        </parent>
+    </person>
+    <person name="Malin Ekman" ssn="19900216" left="innan 2013">
+        <emailAddress address="black.aura@hotmail.com" />
+        <phone number="08-7732440" />
+        <address street="Lövdalsvägen 30" postal="132 41 Saltsjö-Boo" />
+    </person>
+    <person name="Malte Haargaard" group="Lilla kakorna" ssn="20031017-1491" allergies="Nej">
+        <address street="Hindvägen 6" postal="132 48 Saltsjö-Boo" />
+        <phone number="072-5095959" />
+        <parent name="Karin Jaldung Haargaard">
+            <emailAddress address="karin.jaldunghaargaard@gmail.com" />
+            <emailAddress address="karin@pickupstudio.se" />
+            <phone number="0708-429346" />
+        </parent>
+        <parent name="Morten Haargaard">
+            <emailAddress address="morten.haargaard@gmail.com" />
+            <phone number="0702-612401" />
+            <photo url="Morten Haargaard.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="J" onInternet="N" namePermitted="N" />
+    </person>
+    <person name="Martin Adolfsson" group="Papigrarna" ssn="20010912-4636">
+        <phone number="08-322810" />
+        <address street="Stickvägen 5" postal="131 42 Nacka" />
+        <parent name="Klas Andersson">
+            <emailAddress address="klas_m_andersson@glocalnet.net" />
+            <phone number="070-9154752" />
+            <photo url="Klas Andersson.jpg" />
+        </parent>
+        <parent name="Maria Adolfsson">
+            <phone number="070-680 34 37" />
+            <photo url="Maria Adolfsson.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Matilda Hindersson" ssn="1995" left="2005">
+        <phone number="08-715 64 52" />
+        <address street="Hjortvägen 65A" postal="132 45 Saltsjö-Boo" />
+    </person>
+    <person name="Matilda Sigemo" group="Kaessler" ssn="19960603-3240">
+        <emailAddress address="m.sigemo@gmail.com" />
+        <phone number="076-2270804" />
+        <phone number="08-715 60 22" />
+        <address street="Fältvägen 37" postal="132 35 Saltsjö-Boo" />
+        <parent name="Anna-Maja Sigemo">
+            <emailAddress address="annamaja.sigemo@gmail.com" />
+            <phone number="070-4994421" />
+            <photo url="Anna-Maja Sigemo.jpg" />
+        </parent>
+        <parent name="Åke Sigemo"></parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Mats Carlin" ssn="19840803" left="innan 2013">
+        <phone number="073-4040128" />
+        <address street="Astrakang. 13" postal="165 52 Hässelby" />
+    </person>
+    <person name="Mattias Starck" ssn="19740116" left="innan 2013">
+        <emailAddress address="mattias@supportgruppen.se" />
+        <phone number="08-7732440" />
+        <address street="Lövdalsvägen 30" postal="132 41 Saltsjö-Boo" />
+    </person>
+    <person name="Max Masuch" group="Lilla kakorna" ssn="20030811-4412" left="innan 2013">
+        <address street="Grytvägen 21" postal="132 44 Saltsjö-Boo" />
+        <parent name="Martina Masuch">
+            <emailAddress address="martinamasuch@hotmail.com" />
+            <phone number="0734-083231" />
+        </parent>
+        <parent name="Andreas Masuch">
+            <address street="Vintervägen 24" postal="171 42 Solna" />
+        </parent>
+        <modelRelease nackaSmuPromotion="N" scoutPromotion="N" photographerPortfolio="N" onInternet="N" namePermitted="N" />
+    </person>
+    <person name="Melker Welléus" group="Papigrarna" ssn="20011111-7750">
+        <phone number="08-656 25 66" />
+        <phone number="070-860 13 42?" />
+        <address street="Roddarvägen 26" postal="132 47 Saltsjö-Boo" />
+        <parent name="Annika Welléus">
+            <emailAddress address="annika.welleus@gmail.com" />
+            <phone number="076-8960599" />
+            <photo url="Annika Welleus.jpg" />
+        </parent>
+        <parent name="Nils Welléus">
+            <photo url="Nils Welleus.jpg" />
+        </parent>
+        <note>https://twitter.com/welleus</note>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Mika Holst Norin" group="Liljorna" ssn="20040618-5009" left="innan 2013">
+        <phone number="08-7158788" />
+        <address street="Husarvägen 10" postal="132 37 Saltsjö-Boo" />
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="N" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Mikael Svensson" ssn="19821023-0119">
+        <emailAddress address="brevlada@mikaelsvensson.info" />
+        <phone number="0733-214138" />
+        <address street="Cirkusvägen 13 NB" postal="126 31 Hägersten" />
+    </person>
+    <person name="Mona Danielsson" ssn="19720319" left="innan 2013">
+        <emailAddress address="anom@bredband.net" />
+        <phone number="076-1133613" />
+        <phone number="08-57026147" />
+        <address street="Storholmsvägen 18" postal="132 52 Saltsjö-Boo" />
+    </person>
+    <person name="Noa" ssn="1998" left="2010 ht"></person>
+    <person name="Oliver Dichy" ssn="980325" left="2009">
+        <phone number="070-4240095" />
+        <address street="Jungmansvägen 20" postal="132 47 Saltsjö-Boo" />
+        <parent name="Catherine Dichy">
+            <emailAddress address="c.dichy@spray.se" />
+        </parent>
+    </person>
+    <person name="Oskar Cedergren" ssn="20011126-8991">
+        <phone number="070-491 66 58" />
+        <address street="Drabantvägen 32b" postal="13247 Saltsjö-Boo" />
+        <parent name="Mi Helén">
+            <emailAddress address="mi.helen1@gmail.com" />
+            <phone number="070-9422916" />
+        </parent>
+        <parent name="Magnus Cedergren">
+            <emailAddress address="magnus.cedergren@gmail.com" />
+            <phone number="070-6156667" />
+            <photo url="Magnus Cedergren.jpg" />
+        </parent>
+    </person>
+    <person name="Oskar Sjöholm" ssn="960510" left="2005">
+        <phone number="08-715 15 73" />
+        <address street="Björkholmsvägen 216" postal="132 52 Saltsjö-Boo" />
+    </person>
+    <person name="Petter Miltén" ssn="1995" left="2003">
+        <phone number="08-747 17 97" />
+        <address street="Kompassvägen 14" postal="132 46 Saltsjö-Boo" />
+    </person>
+    <person name="Petter Sandberg Utas" ssn="20010314" left="2009">
+        <address street="Storholmsvägen 182" postal="132 52 Saltsjö-Boo" />
+        <parent name="Anders Utas">
+            <emailAddress address="andersutas@hotmail.com" />
+        </parent>
+    </person>
+    <person name="Rebecka de Verdier" ssn="20011024-9307" allergies="Nej">
+        <phone number="070-3355548" />
+        <phone number="08-4115100" />
+        <address street="Spanarvägen 14B" postal="13246 Saltsjö-Boo" />
+        <parent name="Helena de Verdier">
+            <emailAddress address="helena.de-verdier@teliasonera.com" />
+            <phone number="070-5513138" />
+            <phone number="08-4115100" />
+            <photo url="Helena de Verdier.jpg" />
+        </parent>
+        <parent name="Jan Sundberg">
+            <phone number="070-6690863" />
+            <phone number="08-4115100" />
+            <address street="Kungsvägen 12" postal="132 nn Nacka" />
+        </parent>
+        <modelRelease nackaSmuPromotion="N" scoutPromotion="N" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Ronja Rapp" ssn="970714" left="2008">
+        <phone number="08-747 04 08" />
+        <address street="Stormvägen 9" postal="132 31 Saltsjö-Boo" />
+    </person>
+    <person name="Saga Graah-Hagelbäck" ssn="950810" left="2009">
+        <phone number="08-74716 86" />
+        <address street="Bergdalsvägen 2" postal="132 45 Saltsjö-Boo" />
+    </person>
+    <person name="Samuel Ånestig" group="Papigrarna" ssn="20020226-3976">
+        <phone number="073-9572848" />
+        <phone number="08-7471014" />
+        <address street="Gullvivansväg 12" postal="132 45 Saltsjö-Boo" />
+        <parent name="Helena Ånestig">
+            <phone number="070-6654771" />
+        </parent>
+        <parent name="Peter Ånestig">
+            <emailAddress address="peter.anestig@telia.com" />
+            <phone number="070-6654770" />
+            <photo url="Peter Anestig.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Sanna Andersson" ssn="19850516-6648" left="innan 2013">
+        <emailAddress address="sanna.erika.andersson@gmail.com" />
+        <phone number="0733-595616" />
+        <address street="Finntorpsvägen 3" postal="131 36 Nacka" />
+    </person>
+    <person name="Sara Ingemarsson" ssn="19920515-1328"></person>
+    <person name="Sofia Eriksson" ssn="19841124-0388">
+        <emailAddress address="eriksson_sofia@tele2.se" />
+        <phone number="0709-48 11 27" />
+        <address street="Kapellgatan 2" postal="171 70 Solna" />
+    </person>
+    <person name="Sofia Flood" ssn="19880520" left="innan 2013">
+        <emailAddress address="sofiaflood@hotmail.com" />
+        <phone number="070-6628997" />
+        <address street="Dalbogatan 6" postal="504 38 Borås" />
+    </person>
+    <person name="Sofia Öferström" ssn="940705" left="2006">
+        <phone number="08-747 16 38" />
+        <address street="Badsjöstigen 21" postal="132 45 Saltsjö-Boo" />
+    </person>
+    <person name="Uno Heinemann" ssn="20040413-7614" allergies="Nej">
+        <address street="Hindvägen 11" postal="132 48 Saltsjö-Boo" />
+        <parent name="Maria Heinemann">
+            <emailAddress address="heinemannmaria@hotmail.com" />
+            <phone number="0708-813179" />
+            <photo url="Maria Heinemann.jpg" />
+        </parent>
+        <parent name="David Heinemann">
+            <emailAddress address="dahe05@handelsbanken.se" />
+            <phone number="0761-460066" />
+            <photo url="David Heinemann.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Urban Höglund" ssn="19660503" left="innan 2013">
+        <emailAddress address="urban.hoglund.alma@folkbildning.net" />
+        <address street="Ugglevägen 1B" postal="131 44 Nacka" />
+    </person>
+    <person name="Valdemar Öhnström" group="Kaessler" ssn="19981127-0314">
+        <emailAddress address="ohnstrom@home.se" />
+        <phone number="+46730620871" />
+        <phone number="08-668 97 96" />
+        <address street="Kaptensvägen 3" postal="132 46 Saltsjö-Boo" />
+        <parent name="Katarina Perlhagen">
+            <emailAddress address="perlhagen@home.se" />
+            <phone number="0708-866822" />
+            <photo url="Katarina Perlhagen.jpg" />
+        </parent>
+        <parent name="Martin Öhnström">
+            <phone number="070 668 9796" />
+            <photo url="Martin Ohnstrom.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Vendela Rex" group="Lilla kakorna" ssn="20031208-1565" left="innan 2013">
+        <address street="Grytvägen 21" postal="132 44 Saltsjö-Boo" />
+        <parent name="Johan Rex">
+            <emailAddress address="rex@edsvikensel.se" />
+            <phone number="076-2007882" />
+        </parent>
+        <parent name="Jaqueline Rex">
+            <emailAddress address="jacqueline.rex@hotmail.com" />
+        </parent>
+        <modelRelease nackaSmuPromotion="N" scoutPromotion="N" photographerPortfolio="N" onInternet="N" namePermitted="N" />
+    </person>
+    <person name="Vera Graah-Hagelbäck" ssn="19991118" left="2011 ht">
+        <phone number="08-747 16 86" />
+        <address street="Bergdalsvägen 2" postal="132 45 Saltsjö-Boo" />
+        <parent name="Magnus Birgersson">
+            <emailAddress address="magnus.birgersson@minmail.net" />
+        </parent>
+        <parent name="Anna Graah-Hagelbäck">
+            <emailAddress address="anna.hagelback@minmail.net" />
+        </parent>
+    </person>
+    <person name="Vidar Welléus" group="Lilla kakorna" ssn="20030821-0632">
+        <phone number="08-656 25 66" />
+        <address street="Roddarvägen 26" postal="132 47 Saltsjö-Boo" />
+        <parent name="Annika Welléus">
+            <emailAddress address="annika.welleus@gmail.com" />
+            <phone number="076-8960599" />
+            <photo url="Annika Welleus.jpg" />
+        </parent>
+        <parent name="Nils Welléus">
+            <photo url="Nils Welleus.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Wilmer Widlund" group="Liljorna" ssn="20030923-nnnn">
+        <parent name="Jennie Widlund">
+            <emailAddress address="jewirocky@gmail.com" />
+            <phone number="0763-137757" />
+        </parent>
+    </person>
+    <person name="Wimmo Swedberg" group="Papigrarna" ssn="20010327-5277">
+        <address street="Marinstadsvägen 17B" postal="131 37 Nacka" />
+        <phone number="0760-451671" />
+        <parent name="Malin Swedberg">
+            <emailAddress address="malin.swedberg@hotmail.com" />
+            <phone number="070-7233212" />
+            <photo url="Malin Svedberg.jpg" />
+        </parent>
+        <parent name="Hans Eskilsson">
+            <phone number="070-765 58 87" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="J" namePermitted="N" />
+    </person>
+    <person name="Ylva Nordmark" ssn="19840916-0283">
+        <emailAddress address="ylva.nordmark@gmail.com" />
+        <phone number="0736-163540" />
+        <phone number="08-466 93 53" />
+        <address street="Hästhagsvägen 1" postal="134 40 Gustavsberg" />
+    </person>
+    <person name="Unni Tapio" ssn="20050912-8293">
+        <address street="Skiftesvägen 4" postal="132 42 Saltsjö-Boo" />
+        <parent name="Mia Tapio">
+            <emailAddress address="miatapio@telia.com" />
+            <phone number="070-5400921" />
+            <photo url="Mia Tapio.jpg" />
+        </parent>
+        <parent name="Jonas Tapio">
+            <phone number="072-366 78 95" />
+            <phone number="072-366 78 96" />
+            <emailAddress address="jonas.tapio@citycon.se" />                               
+            <photo url="Jonas Tapio.jpg" />
+        </parent>
+    </person>
+    <person name="Sofia Bergengren" ssn="20050602-6780" allergies="Nej">
+        <address street="Hermelinsvägen 23" postal="132 46 Saltsjö-Boo" />
+        <parent name="Caroline Bergengren">
+            <emailAddress address="caroline.bergengren@hotmail.se" />
+            <phone number="0704-836942" />
+            <phone number="08-6625402" />
+        </parent>
+        <parent name="Peter Bergengren">
+            <emailAddress address="peter.bergengren@hotmail.se" />
+            <phone number="0739-206555" />
+            <photo url="Peter Bergengren.jpg" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Tyra Björklund" ssn="20051126-2669">
+        <address street="Kompassvägen 20" postal="13246 Saltsjö-Boo" />
+        <parent name="Ulrika Kronqvist">
+            <emailAddress address="ulrika.k@telia.com" />
+            <phone number="0708-980163" />
+            <photo url="Ulrika Kronqvist.jpg" />
+        </parent>
+        <parent name="Mats Björklund">
+            <emailAddress address="mats.gb@telia.com" />
+            <phone number="0708-89 99 99" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="J" photographerPortfolio="J" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Linnea Reibo" ssn="20050110-7528" allergies="Nej">
+        <address street="Ängsbacken 5" postal="13240 Saltsjö-Boo" />
+        <parent name="Anja Hedlund">
+            <emailAddress address="anja.hedlund@nacka.se" />
+            <phone number="070-2280861" />
+            <address street="Ängsbacken 5" postal="13240 Saltsjö-Boo" />
+        </parent>
+        <parent name="Jonas Reibo">
+            <emailAddress address="jonas@reibo.se" />
+            <phone number="070-7970282" />
+            <address street="Renvägen 7A" postal="13246 Saltsjö-Boo" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Jennie Läck" ssn="20050808-9448" allergies="Nej">
+        <address street="Lännäsvägen 14" postal="132 46 Saltsjö-Boo" />
+        <parent name="Tanja Tuomi">
+            <emailAddress address="tanja70@gmail.com" />
+            <phone number="073-3108602" />
+        </parent>
+        <parent name="Niklas Läck">
+            <emailAddress address="nickehem@gmail.com" />
+            <phone number="0704-922177" />
+        </parent>
+        <modelRelease nackaSmuPromotion="J" scoutPromotion="N" photographerPortfolio="N" onInternet="J" namePermitted="J" />
+    </person>
+    <person name="Erik Beilav" ssn="2003-03-21-0694">
+        <address street="Bergåsavägen 1" postal="13147 Nacka" />
+        <parent name="Tommy Herbertsson">
+            <emailAddress address="bmontageteam@gmail.com" />
+            <phone number="070-4002420" />
+        </parent>
+    </person>
+</data>

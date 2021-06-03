@@ -91,6 +91,6 @@
     <button type="submit" name="action" value="send-links" class="btn btn-default">Skicka länk för att uppdatera kontaktinformation</button>
     <button type="submit" name="action" value="show-map" class="btn btn-default">Visa på karta</button>
     <button type="submit" name="action" value="print-list" class="btn btn-default">Telefonlista</button>
-    <button type="submit" name="action" value="send-pdf" class="btn btn-default">Skicka PDF</button>
+    <button type="submit" name="action" value="send-pdf" class="btn btn-default">Skicka faktura</button>
     <button type="submit" name="action" value="sync-contacts" class="btn btn-default">Synka Google-kontakter</button>
 </div>

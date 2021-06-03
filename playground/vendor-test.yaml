@@ -1,0 +1,15 @@
+rubrik: Faktura från Nacka equmenia
+intro:
+  - Hej.
+  - Här fakturan från Nacka equmenia gällande korvgrillningen den 14 maj. Eftersom alla bullarna inte var hembakade och kaffekopparna var ganska små så har vi avrundat nedåt.
+rader:
+  - id: 1
+    text: Hej
+    belopp: 12
+  - id: 2
+    text: Världen
+    belopp: 10.2
+betalningsmottagare: PG 466215-1
+meddelande: QR16070301
+fakturadatum: den 3 juli 2016
+forfallodatum: 2016-08-03 (meddela oss om ni vill delbetala)

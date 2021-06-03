@@ -1,0 +1,208 @@
+question:
+  id: 1
+  points: 5
+group:
+  id: 2
+  questions:
+    - id: A
+      points: 1
+      answers:
+        - Stetoskop
+    - id: B
+      points: 1
+      answers:
+        - Blodtrycksmätare
+        - Sphygmomanometer
+    - id: C
+      points: 1
+      answers:
+        - Nålförare
+    - id: D
+      points: 1
+      answers:
+        - Hjärtdefibrillator
+    - id: E
+      points: 1
+      answers:
+        - Otoskop
+question:
+  id: 3
+  points: 1
+  grading: points_per_correct_answer
+  answers:
+    - Axelleden
+    - Thorax
+    - Ryggkotot
+    - Adamsäpple
+    - Bukspottskörteln
+question:
+  id: 4
+  points: 10
+  answers:
+    - '"Att låta det inre ha försteg framför det yttre, själen framför världen – vart det än för." - Dag Hammarskjöld'
+question:
+  id: 5
+question:
+  id: 6
+  points: 10
+  answers:
+    - 901
+group:
+  id: 7
+  complete_group_bonus_points: 1
+  questions:
+    - id: A
+      points: 1
+      answers:
+        - Nav-el
+    - id: B
+      points: 1
+      answers:
+        - Ljum-sken
+    - id: C
+      points: 1
+      answers:
+        - B-röst
+    - id: D
+      points: 1
+      answers:
+        - Arm-båge
+    - id: E
+      points: 1
+      answers:
+        - Sken-ben
+    - id: F
+      points: 1
+      answers:
+        - Nyckel-ben
+    - id: G
+      points: 1
+      answers:
+        - Båt-ben
+    - id: H
+      points: 1
+      answers:
+        - Näs-rygg
+    - id: I
+      points: 1
+      answers:
+        - Ax-el
+    - id: J
+      points: 1
+      answers:
+        - Adams-äpple
+    - id: K
+      points: 1
+      answers:
+        - Bu-ken
+    - id: L
+      points: 1
+      answers:
+        - Svan-skota
+    - id: M
+      points: 1
+      answers:
+        - Hal-skota
+    - id: N
+      points: 1
+      answers:
+        - Skin-kor
+group:
+  id: 8
+  complete_group_bonus_points: 1
+  questions:
+    - id: A
+      points: 7
+      answers:
+        - Alice
+    - id: B
+      points: 7
+      answers:
+        - Bob
+
+group:
+  id: 9
+  complete_group_bonus_points: 1
+  questions:
+    - id: A
+      answers:
+        - Klok
+    - id: B
+      answers:
+        - Skorpa
+    - id: C
+      answers:
+        - Tält
+    - id: D
+      answers:
+        - Gast
+    - id: E
+      answers:
+        - Krumstav
+    - id: F
+      answers:
+        - Brasa
+    - id: G
+      answers:
+        - Betsel
+group:
+  id: 10
+  complete_group_bonus_points: 2
+  questions:
+    - id: A
+      answers:
+        - Pall
+    - id: B
+      answers:
+        - Kanal
+    - id: C
+      answers:
+        - Kramp
+    - id: D
+      answers:
+        - Fara
+    - id: E
+      answers:
+        - Feber
+    - id: F
+      answers:
+        - Stol
+    - id: G
+      answers:
+        - Hund
+    - id: H
+      answers:
+        - Mjöl
+    - id: I
+      answers:
+        - Krok
+    - id: J
+      answers:
+        - Bränna
+    - id: K
+      answers:
+        - Tjänare
+    - id: L
+      answers:
+        - Fager
+    - id: M
+      answers:
+        - Hand
+    - id: N
+      answers:
+        - Fot
+    - id: O
+      answers:
+        - Muskel
+    - id: P
+      answers:
+        - Lever
+    - id: Q
+      answers:
+        - Tarm
+    - id: R
+      answers:
+        - Finger
+question:
+  id: 11
+  points: 20

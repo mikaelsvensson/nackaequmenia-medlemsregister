@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <script src="../vendor/components/jquery/jquery.min.js"></script>
+
+    <script src="../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <title>Ladda upp bild</title>
+</head>
+
+<body>
+
+<div class="container">
+    <form>
+        <section>
+            <h3>Vilka är ni?</h3>
+
+            <div class="form-group">
+                <label for="team">Patrull</label>
+                <input list="teams" class="form-control" id="team">
+            </div>
+
+            <datalist id="teams">
+                <option value="Kaessler"/>
+                <option value="Rosa godis"/>
+            </datalist>
+
+        </section>
+
+        <section>
+            <h3>Välj en bild eller ta ett foto:</h3>
+
+            <p>Med den här knappen kan du välja ta en ny bild med kameran eller välja en bild du tagit sedan
+                tidigare:</p>
+
+            <div class="form-group">
+                <input type="file" id="take-picture" accept="image/*">
+            </div>
+
+            <p>Eftersom scouter är vänliga och hjälpsamma så kommer bilden automatiskt förminskas innan den skickas, så
+                att
+                du inte slösar på dina gigabyte!</p>
+
+            <div id="preview" class="hidden">
+                <p>Du har valt den här bilden, som är <span id="upload-size"></span> GB:</p>
+                <img src="about:blank" alt="" id="show-picture" class="img-responsive img-thumbnail">
+            </div>
+
+            <p id="error"></p>
+
+        </section>
+
+        <section>
+            <h3>Vad föreställer bilden?</h3>
+
+            <div class="form-group">
+                <label for="tag">Motiv</label>
+                <input list="keys" class="form-control" id="tag">
+            </div>
+
+            <datalist id="keys">
+                <option value="Träben"/>
+                <option value="hundben"/>
+                <option value="månsken"/>
+                <option value="Ben Hur"/>
+                <option value="Ben Kenobi"/>
+                <option value="Ben Solo"/>
+                <option value="Fårfiol"/>
+                <option value="viol"/>
+                <option value="violin"/>
+            </datalist>
+        </section>
+
+        <section>
+            <h3>Skicka in</h3>
+            <p id="send-status" class="hidden text-muted"></p>
+            <input class="btn btn-success" type="button" value="Submit" id="send-button">
+        </section>
+    </form>
+</div>
+
+<script src="jquery-3.1.0.min.js"></script>
+<script src="upload.js?<?=time()?>"></script>
+
+</body>
+</html>
