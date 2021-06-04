@@ -11,9 +11,9 @@ wget --quiet https://github.com/PHPMailer/PHPMailer/archive/master.zip -O $TEMPD
 unzip -q -j $TEMPDIR/phpmailer.zip.temp PHPMailer-master/src/* -d $TEMPDIR/lib/phpmailer
 rm $TEMPDIR/phpmailer.zip.temp
 
-## Config files
+## Copy files
 
-cp -r ../v2/ $TEMPDIR
+cp -r ../ $TEMPDIR
 
 ## Remove files which shouldn't be copied
 
@@ -25,6 +25,8 @@ rm $TEMPDIR/config.sample.ini
 
 rm $TEMPDIR/config.ini
 mv $TEMPDIR/config.prod.ini $TEMPDIR/config.ini
+rm $TEMPDIR/.htaccess
+mv $TEMPDIR/.htaccess.prod $TEMPDIR/.htaccess
 
 ## Copy
 
