@@ -31,7 +31,20 @@
                 'is_created' => 'Utkast'
             ][$group]);
             foreach ($invoices as $invoice) {
-                printf('<p><a href="invoice.php?id=%s">%s</a></p>', $invoice->invoice_id, $invoice->external_invoice_id);
+                $lines = join(', ', array_map(function ($invoice_line) { 
+                    return $invoice_line->text; 
+                }, $invoice->items));
+
+                $reference_person = join(' ', array(
+                    $invoice->reference_person->first_name, 
+                    $invoice->reference_person->sur_name
+                ));
+
+                printf('<p><a href="invoice.php?id=%s">%s</a>: %s. %s.</p>', 
+                    $invoice->invoice_id, 
+                    $invoice->external_invoice_id, 
+                    $reference_person,
+                    $lines);
             }
             print '</div></section>';
         }

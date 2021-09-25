@@ -166,6 +166,8 @@ function invoices_get_all(PDO $dbh, string $sql_where = '', array $sql_params = 
         $stmt->execute();
 
         $result->items = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        $result->reference_person = db_get_person($dbh, $result->reference_person_id);
     }
 
     return $invoices;
