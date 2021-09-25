@@ -5,7 +5,7 @@ https://hub.docker.com/_/php/
     $ docker run \
         -p 80:80 \
         --name medlemsregister \
-        -v "$PWD":/var/www/html \
+        -v "$PWD/src":/var/www/html \
         php:7.2-apache
 
 Go to http://localhost/
@@ -24,9 +24,9 @@ Do this:
 
 ## Install dependencies
 
-  mkdir -p lib/phpmailer
+  mkdir -p src/lib/phpmailer
   wget https://github.com/PHPMailer/PHPMailer/archive/master.zip -O phpmailer.zip.temp
-  unzip -j phpmailer.zip.temp PHPMailer-master/src/* -d lib/phpmailer
+  unzip -j phpmailer.zip.temp PHPMailer-master/src/* -d src/lib/phpmailer
   rm phpmailer.zip.temp
 
 ## Deploy using SFTP

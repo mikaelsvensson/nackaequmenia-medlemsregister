@@ -8,12 +8,12 @@
 /v1/config.ini
 /v1/*.apps.googleusercontent.com.json
 /v1/archive/
-config.ini
+/src/config.ini
 config.prod.ini
-db.sqlite3
-.htpasswd
+/src/db.sqlite3
+/src/.htpasswd
 .htaccess.prod
-lib/phpmailer/
-temp/
+/src/lib/phpmailer/
+/src/temp/
 .DS_Store
 _deploy/deploy-temp/

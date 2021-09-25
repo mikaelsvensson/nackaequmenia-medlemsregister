@@ -13,7 +13,7 @@ rm $TEMPDIR/phpmailer.zip.temp
 
 ## Copy files
 
-cp -r ../ $TEMPDIR
+cp -r ../src/ $TEMPDIR
 
 ## Remove files which shouldn't be copied
 
@@ -24,9 +24,9 @@ rm $TEMPDIR/config.sample.ini
 ## Fix config files
 
 rm $TEMPDIR/config.ini
-mv $TEMPDIR/config.prod.ini $TEMPDIR/config.ini
+mv ../config.prod.ini $TEMPDIR/config.ini
 rm $TEMPDIR/.htaccess
-mv $TEMPDIR/.htaccess.prod $TEMPDIR/.htaccess
+mv ../.htaccess.prod $TEMPDIR/.htaccess
 
 ## Copy
 
