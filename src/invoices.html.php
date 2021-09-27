@@ -24,7 +24,7 @@
         foreach (array_reverse($invoice_groups) as $group => $invoices) {
             print '<section class="section"><div class="container">';
             printf('<p class="subtitle">%s</p>', [
-                'is_invalidated' => 'Ogiltig',
+                'is_invalidated' => 'Makulerad',
                 'is_paid' => 'Betalad',
                 'is_sent' => 'Skickad',
                 'is_ready' => 'Klar för att skickas',

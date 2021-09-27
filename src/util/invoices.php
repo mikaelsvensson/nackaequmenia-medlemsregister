@@ -117,10 +117,10 @@ function invoices_get_all(PDO $dbh, string $sql_where = '', array $sql_params = 
     $stmt = $dbh->prepare('
         SELECT 
             inv.*, 
-            EXISTS(SELECT invlog_created.invoice_id FROM invoices_log AS invlog_created WHERE invlog_created.action = :action_created AND invlog_created.invoice_id = inv.invoice_id) is_created, 
-            EXISTS(SELECT invlog_ready.invoice_id FROM invoices_log AS invlog_ready WHERE invlog_ready.action = :action_ready AND invlog_ready.invoice_id = inv.invoice_id) is_ready, 
-            EXISTS(SELECT invlog_sent.invoice_id FROM invoices_log AS invlog_sent WHERE invlog_sent.action = :action_sent AND invlog_sent.invoice_id = inv.invoice_id) is_sent, 
-            EXISTS(SELECT invlog_paid.invoice_id FROM invoices_log AS invlog_paid WHERE invlog_paid.action = :action_paid AND invlog_paid.invoice_id = inv.invoice_id) is_paid, 
+            EXISTS(SELECT invlog_created.invoice_id     FROM invoices_log AS invlog_created     WHERE invlog_created.action = :action_created         AND invlog_created.invoice_id = inv.invoice_id    ) is_created, 
+            EXISTS(SELECT invlog_ready.invoice_id       FROM invoices_log AS invlog_ready       WHERE invlog_ready.action = :action_ready             AND invlog_ready.invoice_id = inv.invoice_id      ) is_ready, 
+            EXISTS(SELECT invlog_sent.invoice_id        FROM invoices_log AS invlog_sent        WHERE invlog_sent.action = :action_sent               AND invlog_sent.invoice_id = inv.invoice_id       ) is_sent, 
+            EXISTS(SELECT invlog_paid.invoice_id        FROM invoices_log AS invlog_paid        WHERE invlog_paid.action = :action_paid               AND invlog_paid.invoice_id = inv.invoice_id       ) is_paid, 
             EXISTS(SELECT invlog_invalidated.invoice_id FROM invoices_log AS invlog_invalidated WHERE invlog_invalidated.action = :action_invalidated AND invlog_invalidated.invoice_id = inv.invoice_id) is_invalidated 
         FROM 
             invoices AS inv 
@@ -166,6 +166,10 @@ function invoices_get_all(PDO $dbh, string $sql_where = '', array $sql_params = 
         $stmt->execute();
 
         $result->items = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $result->is_readonly = $result->is_ready ||
+            $result->is_sent ||
+            $result->is_paid ||
+            $result->is_invalidated;
 
         $result->reference_person = db_get_person($dbh, $result->reference_person_id);
     }
@@ -222,6 +226,11 @@ function invoices_set_ready(PDO $dbh, object $invoice)
         'html_path' => $relative_path_html,
         'pdf_path' => $relative_path_pdf
     ]);
+}
+
+function invoices_set_invalidated(PDO $dbh, object $invoice)
+{
+    invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_INVALIDATED, []);
 }
 
 /**

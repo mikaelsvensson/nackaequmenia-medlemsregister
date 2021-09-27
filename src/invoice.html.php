@@ -53,19 +53,19 @@
                 <?php
                 foreach ($invoice->items as $item) {
                     printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>?</td></tr>',
-                        sprintf('<input class="input" type="text" name="item__%s__text" value="%s" %s/>', $item->line_number, $item->text, $invoice->is_ready ? 'disabled="disabled"' : ''),
-                        sprintf('<input class="input" type="text" name="item__%s__unit_count" value="%s" %s/>', $item->line_number, $item->unit_count, $invoice->is_ready ? 'disabled="disabled"' : ''),
-                        sprintf('<input class="input" type="text" name="item__%s__unit_price" value="%s" %s/>', $item->line_number, invoices_from_cents($item->unit_price), $invoice->is_ready ? 'disabled="disabled"' : ''));
+                        sprintf('<input class="input" type="text" name="item__%s__text" value="%s" %s/>', $item->line_number, $item->text, $invoice->is_readonly ? 'disabled="disabled"' : ''),
+                        sprintf('<input class="input" type="text" name="item__%s__unit_count" value="%s" %s/>', $item->line_number, $item->unit_count, $invoice->is_readonly ? 'disabled="disabled"' : ''),
+                        sprintf('<input class="input" type="text" name="item__%s__unit_price" value="%s" %s/>', $item->line_number, invoices_from_cents($item->unit_price), $invoice->is_readonly ? 'disabled="disabled"' : ''));
                 }
                 printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>?</td></tr>',
-                    sprintf('<input class="input" type="text" name="item__new__text" value="%s" %s/>', '', $invoice->is_ready ? 'disabled="disabled"' : ''),
-                    sprintf('<input class="input" type="text" name="item__new__unit_count" value="%s" %s/>', 1, $invoice->is_ready ? 'disabled="disabled"' : ''),
-                    sprintf('<input class="input" type="text" name="item__new__unit_price" value="%s" %s/>', invoices_from_cents(100), $invoice->is_ready ? 'disabled="disabled"' : ''));
+                    sprintf('<input class="input" type="text" name="item__new__text" value="%s" %s/>', '', $invoice->is_readonly ? 'disabled="disabled"' : ''),
+                    sprintf('<input class="input" type="text" name="item__new__unit_count" value="%s" %s/>', 1, $invoice->is_readonly ? 'disabled="disabled"' : ''),
+                    sprintf('<input class="input" type="text" name="item__new__unit_price" value="%s" %s/>', invoices_from_cents(100), $invoice->is_readonly ? 'disabled="disabled"' : ''));
                 ?>
                 </tbody>
             </table>
 
-            <?php if (!$invoice->is_ready) { ?>
+            <?php if (!$invoice->is_readonly) { ?>
                 <button class="button" name="action" value="invoices_save">Spara ändringar</button>
                 <button class="button" name="action" value="invoices_set_ready">Lås</button>
             <?php } ?>
@@ -78,7 +78,7 @@
             <p class="subtitle">
                 Skicka faktura som PDF
             </p>
-            <?php if ($invoice->is_ready) { ?>
+            <?php if ($invoice->is_ready && !$invoice->is_invalidated) { ?>
                 <div class="field">
                     <!--                <label class="label">Mottagare</label>-->
                     <?php
@@ -99,11 +99,23 @@
                     </div>
                 </div>
             <?php } else { ?>
-                <p>Fakturan måste låsas innan den kan skickas.</p>
+                <p>Fakturan kan skickas i detta läge.</p>
             <?php } ?>
         </form>
     </div>
 </section>
+<?php if (!$invoice->is_invalidated) { ?>
+    <section class="section">
+        <div class="container">
+            <form action="" method="post">
+                <p class="subtitle">
+                    Makulera
+                </p>
+                <button class="button" name="action" value="invoices_set_invalidated">Makulera</button>
+            </form>
+        </div>
+    </section>
+<?php } ?>
 <section class="section">
     <div class="container">
         <p class="subtitle">
