@@ -24,9 +24,9 @@ rm $TEMPDIR/config.sample.ini
 ## Fix config files
 
 rm $TEMPDIR/config.ini
-mv ../config.prod.ini $TEMPDIR/config.ini
+cp ../config.prod.ini $TEMPDIR/config.ini
 rm $TEMPDIR/.htaccess
-mv ../.htaccess.prod $TEMPDIR/.htaccess
+cp ../.htaccess.prod $TEMPDIR/.htaccess
 
 ## Copy
 
