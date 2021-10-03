@@ -59,7 +59,7 @@ switch (@$_POST['action']) {
         }
         break;
     case 'invoices_set_invalidated':
-        invoices_set_invalidated($dbh, $invoice);
+        invoices_set_invalidated($dbh, $invoice, $_POST['invoices_set_invalidated__note']);
         $invoice = invoices_get($dbh, $invoice->invoice_id);
         break;
     case 'invoices_save':

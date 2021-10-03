@@ -111,6 +111,9 @@
                 <p class="subtitle">
                     Makulera
                 </p>
+                <div>
+                    <input class="input" type="text" name="invoices_set_invalidated__note" placeholder="Varför makuleras fakturan?"/>
+                </div>
                 <button class="button" name="action" value="invoices_set_invalidated">Makulera</button>
             </form>
         </div>
@@ -123,13 +126,15 @@
         </p>
         <?php
         foreach ($invoice->log as $item) {
-            $action_html = $item->action;
-//            switch ($item->action) {
-//                case INVOICE_ACTION_SENT:
-//                case INVOICE_ACTION_RENDERED:
-//                    $action_html .= $item->action_data;
-//                    break;
-//            }
+            $data = json_decode($item->action_data, true);
+            switch ($item->action) {
+                case INVOICE_ACTION_INVALIDATED:
+                    $action_html = sprintf('%s. Anteckning: %s.', $item->action, $data['note'] ?? 'Saknas');
+                    break;
+                default:
+                    $action_html = $item->action;
+                    break;
+            }
             printf('<p>%s: %s</p>', date("Y-m-d H:i", $item->created_at), $action_html);
         }
         ?>

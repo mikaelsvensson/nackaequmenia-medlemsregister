@@ -228,9 +228,13 @@ function invoices_set_ready(PDO $dbh, object $invoice)
     ]);
 }
 
-function invoices_set_invalidated(PDO $dbh, object $invoice)
+function invoices_set_invalidated(PDO $dbh, object $invoice, string $note = null)
 {
-    invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_INVALIDATED, []);
+    $data = !empty($note) 
+        ? ['note' => $note]
+        : [];
+    printf($data);
+    invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_INVALIDATED, $data);
 }
 
 /**
