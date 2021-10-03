@@ -26,14 +26,16 @@ $people_groups = [
 
 foreach ($people as $person) {
     $group = '?';
-    foreach (array_keys($people_groups) as $range) {
-        list ($min, $max) = explode('-', $range);
-        if (isset($person->pno) && isset($min) && isset($max)) {
-            $pno = import_normalize_pno($person->pno);
-            $age = intval(date('Y')) - intval(substr($pno, 0, 4));
-            if ($min <= $age && $age < $max) {
-                $group = $range;
-                error_log("${pno} ${min} <= ${age} < ${max} in group ${group}");
+    if (isset($person->pno)) {
+        $pno = import_normalize_pno($person->pno);
+        foreach (array_keys($people_groups) as $range) {
+            list ($min, $max) = explode('-', $range);
+            if (isset($min) && isset($max)) {
+                $age = intval(date('Y')) - intval(substr($pno, 0, 4));
+                if ($min <= $age && $age <= $max) {
+                    $group = $range;
+                    error_log("${pno} ${min} <= ${age} <= ${max} in group ${group}");
+                }
             }
         }
     }
