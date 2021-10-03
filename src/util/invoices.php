@@ -233,8 +233,15 @@ function invoices_set_invalidated(PDO $dbh, object $invoice, string $note = null
     $data = !empty($note) 
         ? ['note' => $note]
         : [];
-    printf($data);
     invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_INVALIDATED, $data);
+}
+
+function invoices_set_paid(PDO $dbh, object $invoice, DateTime $payment_date = null)
+{
+    $data = isset($payment_date) 
+        ? ['payment_date' => $payment_date->getTimestamp()]
+        : [];
+    invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_PAID, $data);
 }
 
 /**

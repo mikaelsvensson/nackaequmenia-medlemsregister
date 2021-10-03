@@ -62,6 +62,10 @@ switch (@$_POST['action']) {
         invoices_set_invalidated($dbh, $invoice, $_POST['invoices_set_invalidated__note']);
         $invoice = invoices_get($dbh, $invoice->invoice_id);
         break;
+    case 'invoices_set_paid':
+        invoices_set_paid($dbh, $invoice, date_create($_POST['invoices_set_paid__payment_date']));
+        $invoice = invoices_get($dbh, $invoice->invoice_id);
+        break;
     case 'invoices_save':
         if (!$invoice->is_invalidated) {
             foreach ($_POST as $key => $value) {

@@ -104,6 +104,23 @@
         </form>
     </div>
 </section>
+<?php if (!$invoice->is_paid) { ?>
+    <section class="section">
+        <div class="container">
+            <form action="" method="post">
+                <p class="subtitle">
+                    Markera som betalad
+                </p>
+                <div>
+                    <?php
+                    printf('<input class="input" type="date" name="invoices_set_paid__payment_date" value="%s" />', (new DateTime())->format('Y-m-d'));
+                    ?>
+                </div>
+                <button class="button" name="action" value="invoices_set_paid">Markera som betalad</button>
+            </form>
+        </div>
+    </section>
+<?php } ?>
 <?php if (!$invoice->is_invalidated) { ?>
     <section class="section">
         <div class="container">
@@ -130,6 +147,16 @@
             switch ($item->action) {
                 case INVOICE_ACTION_INVALIDATED:
                     $action_html = sprintf('%s. Anteckning: %s.', $item->action, $data['note'] ?? 'Saknas');
+                    break;
+                case INVOICE_ACTION_PAID:
+                    $payment_date = $data['payment_date'];
+                    $action_html = sprintf(
+                        '%s. Datum: %s.',
+                        $item->action,
+                        isset($payment_date) 
+                            ? (new DateTime("@${payment_date}"))->format('Y-m-d')
+                            : 'Okänt'
+                    );
                     break;
                 default:
                     $action_html = $item->action;
