@@ -31,19 +31,20 @@
                     }
                 }        
                 ?>
-                <p><a href="import.php">Importera...</a></p>
             </div>
             <div class="column">
                 <p class="subtitle">Fakturor</p>
                 <p><a href="invoices.php">Alla fakturor</a></p>
-
+                
                 <br>
                 <br>
                 <br>
                 <br>
-
+                
                 <p class="subtitle">Administration av administrationen</p>
                 <p><a href="backup.php">Ladda ner data</a></p>
+                <p><a href="person-upsert.php">Lägg till person manuellt</a></p>
+                <p><a href="import.php">Importera</a></p>
             </div>
         </div>
     </div>

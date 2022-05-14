@@ -28,6 +28,7 @@
             <tr><td>Personnummer:</td><td><?= $person->pno ?></td></tr>
         </tbody></table>
 
+        <?= sprintf('<p><a href="person-upsert.php?id=%s">Redigera</a></p>', $person->person_id) ?>
     </div>
 </section>
 <?php if (isset($guardian_1) || isset($guardian_2)) { ?>

@@ -10,9 +10,9 @@ https://hub.docker.com/_/php/
 
 Go to http://localhost/
 
-Create a `config.ini` file based on `config.sample.ini`.
+Create a `src/config.ini` file based on `src/config.sample.ini`.
 
-    $ cp config.sample.ini config.ini
+    $ cp src/config.sample.ini src/config.ini
 
 ## Stop and uninstall
 
