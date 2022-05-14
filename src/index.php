@@ -29,7 +29,7 @@ foreach ($people as $person) {
     if (isset($person->pno)) {
         $pno = import_normalize_pno($person->pno);
         foreach (array_keys($people_groups) as $range) {
-            list ($min, $max) = explode('-', $range);
+            @list ($min, $max) = explode('-', $range);
             if (isset($min) && isset($max)) {
                 $age = intval(date('Y')) - intval(substr($pno, 0, 4));
                 if ($min <= $age && $age <= $max) {
