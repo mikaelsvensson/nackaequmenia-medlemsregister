@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Faktura <?= $invoice->external_invoice_id ?></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <style>
+        table.table.items tbody td {
+            border: none;
+            vertical-align: middle;
+        }
+        table.table.items td,
+        table.table.items td input {
+            text-align: right;
+        }
+        table.table.items td:first-child,
+        table.table.items td:first-child input {
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <section class="section">
@@ -40,7 +54,7 @@
             <p class="subtitle">
                 Rader
             </p>
-            <table class="table is-narrow">
+            <table class="table is-narrow items">
                 <thead>
                 <tr>
                     <td>Text</td>
@@ -49,13 +63,23 @@
                     <td>Summa</td>
                 </tr>
                 </thead>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><?= invoices_from_cents(array_sum(array_map(function ($item) { return $item->unit_count * $item->unit_price; }, $invoice->items))) ?></td>
+                </tr>
+                </tfoot>
                 <tbody>
                 <?php
                 foreach ($invoice->items as $item) {
-                    printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>?</td></tr>',
+                    $item_sum = invoices_from_cents($item->unit_count * $item->unit_price);
+                    printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>',
                         sprintf('<input class="input" type="text" name="item__%s__text" value="%s" %s/>', $item->line_number, $item->text, $invoice->is_readonly ? 'disabled="disabled"' : ''),
                         sprintf('<input class="input" type="text" name="item__%s__unit_count" value="%s" %s/>', $item->line_number, $item->unit_count, $invoice->is_readonly ? 'disabled="disabled"' : ''),
-                        sprintf('<input class="input" type="text" name="item__%s__unit_price" value="%s" %s/>', $item->line_number, invoices_from_cents($item->unit_price), $invoice->is_readonly ? 'disabled="disabled"' : ''));
+                        sprintf('<input class="input" type="text" name="item__%s__unit_price" value="%s" %s/>', $item->line_number, invoices_from_cents($item->unit_price), $invoice->is_readonly ? 'disabled="disabled"' : ''),
+                        $item_sum);
                 }
                 printf('<tr><td>%s</td><td>%s</td><td>%s</td><td>?</td></tr>',
                     sprintf('<input class="input" type="text" name="item__new__text" value="%s" %s/>', '', $invoice->is_readonly ? 'disabled="disabled"' : ''),
