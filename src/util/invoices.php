@@ -216,17 +216,17 @@ function invoices_log_action(PDO $dbh, string $invoice_id, string $action, array
 }
 
 function invoices_set_ready(PDO $dbh, object $invoice)
-{
+{    
     invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_READY, []);
 
     $invoice = invoices_get($dbh, $invoice->invoice_id);
-
+    
     $html = invoices_render_html($dbh, $invoice);
-
+    
     $relative_path_html = invoices_save_as_html($dbh, $invoice, $html);
 
     $relative_path_pdf = invoices_save_as_pdf($dbh, $invoice, $html);
-
+    
     invoices_log_action($dbh, $invoice->invoice_id, INVOICE_ACTION_RENDERED, [
         'html_path' => $relative_path_html,
         'pdf_path' => $relative_path_pdf
@@ -273,6 +273,7 @@ function invoices_save_as_pdf(PDO $dbh, object $invoice, string $html): string
     $opts = array('http' =>
         array(
             'method' => 'POST',
+	        'timeout' => 15, // seconds
             'header' => 'Content-Type: application/x-www-form-urlencoded',
             'content' => $payload
         )
@@ -281,6 +282,10 @@ function invoices_save_as_pdf(PDO $dbh, object $invoice, string $html): string
     $context = stream_context_create($opts);
 
     $result = file_get_contents($config['html2pdf']['endpoint'], false, $context);
+
+    if ($result === false) {
+        return false;
+    }
 
     return invoices_save_file($dbh, $invoice, $result, $config['invoice']['rendered_pdf_file_path']);
 }

@@ -26,16 +26,20 @@ switch (@$_POST['action']) {
 
             $data = json_decode($rendered_log_action->action_data, true);
 
-            $path = __DIR__ . '/' . $data['pdf_path'];
-
-            try {
-                $recipients = @$_POST['email_recipient'];
-
+            if (!empty($data['pdf_path'])) {
                 $attachment_name = invoices_file_pattern($dbh, $invoice, $config['invoice']['email_attachment_name']);
+
+                $path = __DIR__ . '/' . $data['pdf_path'];
 
                 $attachments = [
                     $attachment_name => $path
                 ];
+            } else {
+                $attachments = [];
+            }
+
+            try {
+                $recipients = @$_POST['email_recipient'];
 
                 email_send(
                     $recipients,
