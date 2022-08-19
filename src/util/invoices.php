@@ -13,7 +13,12 @@ const INVOICE_ACTION_INVALIDATED = 'invalidated';
 
 function invoices_to_cents($value)
 {
-    return floor(floatval(str_replace(',', '.', $value)) * 100);
+    $value = str_replace(
+        [',', ' '],
+        ['.', ''],
+        $value
+    );
+    return floor(floatval($value) * 100);
 }
 
 function invoices_from_cents($value)
